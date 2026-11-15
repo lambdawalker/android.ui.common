@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">UI Common</string>
+    <string name="catalog_description">Reusable components using your app’s theme.</string>
+    <string name="verification">Code verification</string>
+    <string name="instructions">Enter the code from your latest message.</string>
+    <string name="code_label">Confirmation code</string>
+    <string name="code_description">Six-digit confirmation code</string>
+    <string name="paste">Paste code</string>
+    <string name="verify">Verify</string>
+    <string name="reset">Reset</string>
+    <string name="state_label">Preview state: %1$s</string>
+    <string name="next_state">Next state</string>
+    <string name="error">This sample code was not accepted. Try again.</string>
+    <string name="busy">Checking your code…</string>
+    <string name="action_title">Action card</string>
+    <string name="action_body">A heading, description and action controlled by the host.</string>
+    <string name="open">Try action</string>
+    <string name="clicked">Action selected</string>
+    <string name="content_title">Custom content</string>
+    <string name="content_body">A themed container can hold any composable content.</string>
+    <string name="empty_title">Nothing here yet</string>
+    <string name="empty_body">The host supplies this empty-state message.</string>
+    <string name="mode_normal">Ready</string>
+    <string name="mode_error">Error</string>
+    <string name="mode_busy">Busy</string>
+    <string name="mode_disabled">Disabled</string>
+</resources>

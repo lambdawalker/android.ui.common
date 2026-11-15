@@ -1,6 +1,6 @@
 # Shared Android UI and direct consumer migration
 
-Status: proposed design; implementation awaits design approval. The owner has selected direct consumer migration without compatibility wrappers, and Apache 2.0 for all project-owned Android modules.
+Status: approved by the owner on 2026-11-15; implementation in progress. The owner has selected direct consumer migration without compatibility wrappers, and Apache 2.0 for all project-owned Android modules.
 
 ## Intent and scope
 

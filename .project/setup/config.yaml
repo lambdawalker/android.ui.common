@@ -1,0 +1,35 @@
+repository: lambdawalker/android.ui.common
+title: UI Common
+tooling_ref: v0.1.28
+modules:
+  ui-common: UI Common
+key_alias: ui-common
+android_modules:
+  ui-common:
+    path: ':ui-common'
+    directory: ui-common
+    kind: library
+    selected: true
+    screenshots: false
+    namespace: com.apexfission.android.ui.common
+  app:
+    path: ':app'
+    directory: app
+    kind: application
+    selected: true
+    screenshots: false
+    namespace: com.apexfission.android.ui.common.sample
+    application_ids: [com.apexfission.android.ui.common.sample]
+workflows:
+  title: UI Common
+  java_version: '25'
+  documentation_command: sh ./docs.sh build --check
+  screenshot_check_command: sh ./docs.sh check
+  release_validation_command: sh ./docs.sh check
+module_verification:
+  ui-common:
+    class_prefix: com/apexfission/android/ui/common/
+    bytecode_major: 61
+    required_api_artifacts: [foundation, ui, material3]
+bootstrap:
+  jitpack: true

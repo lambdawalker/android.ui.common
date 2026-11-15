@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">UI Common</string>
+    <string name="catalog_description">Componentes reutilizables con el tema de tu aplicación.</string>
+    <string name="verification">Verificación de código</string>
+    <string name="instructions">Introduce el código de tu mensaje más reciente.</string>
+    <string name="code_label">Código de confirmación</string>
+    <string name="code_description">Código de confirmación de seis dígitos</string>
+    <string name="paste">Pegar código</string>
+    <string name="verify">Verificar</string>
+    <string name="reset">Restablecer</string>
+    <string name="state_label">Estado de vista previa: %1$s</string>
+    <string name="next_state">Siguiente estado</string>
+    <string name="error">Este código de ejemplo no se aceptó. Inténtalo de nuevo.</string>
+    <string name="busy">Comprobando tu código…</string>
+    <string name="action_title">Tarjeta de acción</string>
+    <string name="action_body">Título, descripción y acción controlados por la aplicación.</string>
+    <string name="open">Probar acción</string>
+    <string name="clicked">Acción seleccionada</string>
+    <string name="content_title">Contenido personalizado</string>
+    <string name="content_body">Un contenedor con tema admite cualquier contenido composable.</string>
+    <string name="empty_title">Aún no hay contenido</string>
+    <string name="empty_body">La aplicación proporciona este mensaje de estado vacío.</string>
+    <string name="mode_normal">Listo</string>
+    <string name="mode_error">Error</string>
+    <string name="mode_busy">Ocupado</string>
+    <string name="mode_disabled">Deshabilitado</string>
+</resources>

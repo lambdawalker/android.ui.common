@@ -8,6 +8,8 @@
 
 **Tech Stack:** Kotlin, Material 3 Compose, Gradle/Android convention plugins, shared Rust setup/docs CLIs, bundled Astro.
 
+**Progress (2026-11-15):** Shared implementation, sample, CLI/Astro configuration and local validation are complete. Consumer source migrations are implemented and integration builds are in progress. Device execution, human screenshot baseline acceptance and the first public release remain explicit gates. See [verification evidence](../../implementation-verification.md).
+
 **Spec:** [Shared UI migration design](../specs/2026-11-15-shared-ui-migration-design.md).
 
 ## Global constraints

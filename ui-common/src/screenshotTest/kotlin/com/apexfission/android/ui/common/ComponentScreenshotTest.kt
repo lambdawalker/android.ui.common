@@ -1,0 +1,68 @@
+package com.apexfission.android.ui.common
+
+import android.content.res.Configuration
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+import com.android.tools.screenshot.PreviewTest
+
+@PreviewTest
+@Preview(name = "empty-light", widthDp = 393)
+@Preview(name = "empty-dark", widthDp = 393, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun EmptyVerificationScreenshot() { PreviewHost { VerificationFixture() } }
+
+@PreviewTest
+@Preview(name = "partial-light", widthDp = 393)
+@Preview(name = "partial-dark", widthDp = 393, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun PartialVerificationScreenshot() { PreviewHost { VerificationFixture("123") } }
+
+@PreviewTest
+@Preview(name = "complete-light", widthDp = 393)
+@Preview(name = "complete-dark", widthDp = 393, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun CompleteVerificationScreenshot() { PreviewHost { VerificationFixture("123456") } }
+
+@PreviewTest
+@Preview(name = "error-light", widthDp = 393)
+@Preview(name = "error-dark", widthDp = 393, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun ErrorVerificationScreenshot() { PreviewHost { VerificationFixture("123456", error = true) } }
+
+@PreviewTest
+@Preview(name = "busy-light", widthDp = 393)
+@Preview(name = "busy-dark", widthDp = 393, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun BusyVerificationScreenshot() { PreviewHost { VerificationFixture("123456", busy = true) } }
+
+@PreviewTest
+@Preview(name = "disabled-light", widthDp = 393)
+@Preview(name = "disabled-dark", widthDp = 393, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun DisabledVerificationScreenshot() { PreviewHost { VerificationFixture("12", enabled = false) } }
+
+@PreviewTest
+@Preview(name = "components-light", widthDp = 393)
+@Preview(name = "components-dark", widthDp = 393, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun ComponentsScreenshot() { ComponentsPreview() }
+
+@PreviewTest
+@Preview(name = "catalog-light", widthDp = 393, heightDp = 700)
+@Preview(name = "catalog-dark", widthDp = 393, heightDp = 700, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun CatalogScreenshot() { CatalogPreview() }
+
+@PreviewTest
+@Preview(name = "host-theme-narrow-large", widthDp = 320, fontScale = 1.6f)
+@Composable
+fun AlternateHostScreenshot() { PreviewHost(alternate = true) { VerificationFixture("123456", error = true) } }
+
+@PreviewTest
+@Preview(name = "empty-catalog-light", widthDp = 393, heightDp = 700)
+@Preview(name = "empty-catalog-dark", widthDp = 393, heightDp = 700, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun EmptyCatalogScreenshot() { PreviewHost {
+    CatalogScreen("Catalog", "Hidden instruction", showEmptyState = true,
+        emptyState = { EmptyStateCard("No items", "Your items will appear here.") })
+} }

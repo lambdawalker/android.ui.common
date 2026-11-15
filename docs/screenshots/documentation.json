@@ -1,0 +1,36 @@
+{
+  "captures": [
+    {
+      "path": "docs/assets/screenshots/verification-light.png",
+      "image_sha256": "597749531e31637764865e2ce9daa0de18f44d40b7f4bf79610969ed032aad4e",
+      "width": 1032,
+      "height": 942,
+      "fixture": "EmptyVerificationScreenshot_empty-light_d5cc2666_0.png",
+      "status": "documentation illustration; not an accepted regression baseline"
+    },
+    {
+      "path": "docs/assets/screenshots/verification-dark.png",
+      "image_sha256": "e91b11f709dd9a4999e1ee719feccdfbde674a0c8380f3c83f4b3f84db07aaa9",
+      "width": 1032,
+      "height": 942,
+      "fixture": "CompleteVerificationScreenshot_complete-dark_c04af14b_0.png",
+      "status": "documentation illustration; not an accepted regression baseline"
+    },
+    {
+      "path": "docs/assets/screenshots/alternate-host.png",
+      "image_sha256": "0a48aa369d7407e5cae37c2b6a7d75d0e248eb2801f419bdbbeb36ee0f4ec10b",
+      "width": 840,
+      "height": 1567,
+      "fixture": "AlternateHostScreenshot_host-theme-narrow-large_6d9ef005_0.png",
+      "status": "documentation illustration; not an accepted regression baseline"
+    },
+    {
+      "path": "docs/assets/screenshots/components-light.png",
+      "image_sha256": "d4299ca7c81d8f58c1e1f22d32203f327a380a3e632ffd7ec4b8bb902e4d61f4",
+      "width": 1032,
+      "height": 1502,
+      "fixture": "ComponentsScreenshot_components-light_224a804e_0.png",
+      "status": "documentation illustration; not an accepted regression baseline"
+    }
+  ]
+}

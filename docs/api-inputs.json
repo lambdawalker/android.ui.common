@@ -1,0 +1,50 @@
+[
+  {
+    "guide": "docs/agents/source-reference.md",
+    "path": "ui-common/src/main/kotlin/com/apexfission/android/ui/common/ActionCard.kt",
+    "sha256": "b2036581279298124ab10e50d6b2df1d5bb61777b00dc896bc2c0db1a5ba571f",
+    "visibility": "public"
+  },
+  {
+    "guide": "docs/agents/source-reference.md",
+    "path": "ui-common/src/main/kotlin/com/apexfission/android/ui/common/CatalogScreen.kt",
+    "sha256": "7c66499516f8e0e2f820bc0a4994edee361d879a97046b127d381786878804f5",
+    "visibility": "public"
+  },
+  {
+    "guide": "docs/agents/source-reference.md",
+    "path": "ui-common/src/main/kotlin/com/apexfission/android/ui/common/CodeVerificationCard.kt",
+    "sha256": "ab2b0cdf58f95bcb25c19b87471d5540491c87a77eced07c355ea25471d69a9d",
+    "visibility": "public"
+  },
+  {
+    "guide": "docs/agents/source-reference.md",
+    "path": "ui-common/src/main/kotlin/com/apexfission/android/ui/common/ContentCard.kt",
+    "sha256": "1c404bb25e9fa9c4e0fb8f537b2f3f6c8c13d5c398faae80f23fe31be672735b",
+    "visibility": "public"
+  },
+  {
+    "guide": "docs/agents/source-reference.md",
+    "path": "ui-common/src/main/kotlin/com/apexfission/android/ui/common/EmptyStateCard.kt",
+    "sha256": "599a3e55c6ec2ca7c360c76a2679478eb86707a8f65464c1a27dda846ec2a534",
+    "visibility": "public"
+  },
+  {
+    "guide": null,
+    "path": "ui-common/src/main/kotlin/com/apexfission/android/ui/common/OneTimeCode.kt",
+    "sha256": "34695e56656a81f624882f266544a0e9510a064ab1f67a142fe0265443b1d3c7",
+    "visibility": "nonpublic"
+  },
+  {
+    "guide": "docs/agents/source-reference.md",
+    "path": "ui-common/src/main/kotlin/com/apexfission/android/ui/common/OneTimeCodeField.kt",
+    "sha256": "6bc5f03f48abe127478b04439805285bd37f82c89c799a0a85d70f4e3c5be38f",
+    "visibility": "public"
+  },
+  {
+    "guide": "docs/agents/source-reference.md",
+    "path": "ui-common/src/main/kotlin/com/apexfission/android/ui/common/SectionHeading.kt",
+    "sha256": "052b30b3df7e96377af5b65c18fb650043e39a26cf3f097e28943340289bd99f",
+    "visibility": "public"
+  }
+]
