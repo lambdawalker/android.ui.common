@@ -10,14 +10,14 @@ android_modules:
     directory: ui-common
     kind: library
     selected: true
-    screenshots: false
+    screenshots: true
     namespace: com.apexfission.android.ui.common
   app:
     path: ':app'
     directory: app
     kind: application
     selected: true
-    screenshots: false
+    screenshots: true
     namespace: com.apexfission.android.ui.common.sample
     application_ids: [com.apexfission.android.ui.common.sample]
 workflows:

@@ -16,6 +16,9 @@ jobs:
             17
             25
       - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+          log-accepted-android-sdk-licenses: false
       - uses: gradle/actions/setup-gradle@v5
       - name: Compile, unit test and lint
         run: ./gradlew :ui-common:testDebugUnitTest :ui-common:lintDebug :app:lintDebug :app:assembleDebug :ui-common:assembleDebugAndroidTest --no-daemon
@@ -41,6 +44,9 @@ jobs:
             17
             25
       - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+          log-accepted-android-sdk-licenses: false
       - uses: gradle/actions/setup-gradle@v5
       - name: Enable KVM
         run: |
