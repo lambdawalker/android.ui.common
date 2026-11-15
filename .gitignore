@@ -15,3 +15,5 @@ sites/dist/
 # Initial renders are candidates until human baseline acceptance.
 **/src/screenshotTestDebug/reference/
 /.project/setup/workflow-generation.lock
+/sites/.astro-app-*/
+/sites/.astro-build-*/
