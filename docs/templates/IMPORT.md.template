@@ -3,6 +3,6 @@
 
 {{INSTALLATION}}
 
-Until a public artifact is confirmed, use an explicit checkout of this repository
-with Gradle composite dependency substitution as described in the
-[installation guide](docs/agents/installation.md). Development source is not a stable release.
+See the [installation guide](docs/agents/installation.md) for platform requirements and migration
+from source integration. Use a destination and version confirmed above; configuration alone is not
+evidence that another repository hosts the artifact.

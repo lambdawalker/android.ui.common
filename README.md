@@ -2,7 +2,7 @@
 
 Reusable Material 3 Compose cards, catalogs and verification-code entry that inherit your app's theme.
 
-**Development source: no confirmed package release yet.** Read [installation](IMPORT.md) and the
+**JitPack release 0.1.0 is confirmed.** Read [installation](IMPORT.md) and the
 [consumer guide](docs/agents/index.md). The sample app demonstrates state, callbacks and localization.
 
 | Component | Use |

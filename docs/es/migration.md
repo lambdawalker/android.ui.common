@@ -14,4 +14,4 @@ Los imports pasan a `com.apexfission.android.ui.common`. CatalogScreen renombra 
 
 No existen wrappers de compatibilidad. Las versiones publicadas de Demo Common permanecen intactas. Origen: Demo Common `00375200862e82da838ee75545c779505cdc8ca0`; Auth comienza en `f356a5b`, con la licencia Apache 2.0 integrada y el flujo de onboarding más reciente. Se conserva la atribución.
 
-Card Detector y Permissions migran únicamente sus ejemplos. Auth delega la presentación, conservando controladores y navegación. Las migraciones siguen como borradores hasta confirmar el primer artefacto de UI Common; antes se validan mediante sustitución explícita de código fuente.
+Card Detector y Permissions migran únicamente sus ejemplos. Auth delega la presentación, conservando controladores y navegación. Los consumidores ya pueden utilizar la versión 0.1.0 confirmada en JitPack. Reemplaza la sustitución temporal por la dependencia publicada de [Instalación](installation.md) y valida la compilación.

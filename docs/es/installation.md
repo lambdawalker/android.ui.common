@@ -1,20 +1,27 @@
 # Instalación
 
-Requiere Android API 28+, bytecode Java 17 y una versión compatible de Kotlin/Compose. Las versiones de herramientas coinciden con Demo Common. La aplicación de ejemplo no se publica como biblioteca.
+UI Common requiere Android API 28+, bytecode Java 17 y una versión compatible de Kotlin/Compose.
+La aplicación de ejemplo no se publica como biblioteca.
 
-Consulta [IMPORT.md](../../IMPORT.md) para obtener coordenadas confirmadas. Todavía no existen. Para validar la migración, descarga un commit exacto de UI Common y configura una compilación compuesta en el consumidor:
+La versión **0.1.0** está confirmada en JitPack. Agrega JitPack a los repositorios de dependencias en
+settings.gradle.kts y después agrega la dependencia al módulo consumidor:
 
 ```kotlin
-providers.gradleProperty("uiCommonCheckout").orNull?.let { checkout ->
-    includeBuild(checkout) {
-        dependencySubstitution {
-            substitute(module("com.apexfission.android:ui-common"))
-                .using(project(":ui-common"))
-        }
-    }
-}
+maven { url = uri("https://jitpack.io") }
 ```
 
-La dependencia `com.apexfission.android:ui-common:0.0.0-SNAPSHOT` es únicamente una clave de sustitución de código fuente, no una versión publicada. Ejecuta Gradle con `-PuiCommonCheckout=/ruta/absoluta/al/checkout`. Las migraciones permanecen bloqueadas hasta sustituirla por una publicación confirmada. No uses mavenLocal sin limitar su alcance.
+```kotlin
+implementation("com.github.lambdawalker:android.ui.common:ui-common~v0.1.0-jitpack")
+```
 
-Después de publicar, utiliza las coordenadas exactas de IMPORT.md. Card Detector y Permissions dependen de UI Common solo en sus aplicaciones de ejemplo; la biblioteca Permissions conserva API 24 y no depende de UI Common.
+[IMPORT.md](../../IMPORT.md) se genera a partir de publicaciones confirmadas e incluye ejemplos de
+Kotlin DSL, Groovy, catálogo de versiones y Maven. Esta versión usa coordenadas de JitPack; configurar
+`com.apexfission.android:ui-common` no demuestra que exista una publicación en Maven Central.
+
+Las compilaciones normales no necesitan un checkout de UI Common ni sustitución de dependencias.
+Elimina la clave temporal `0.0.0-SNAPSHOT` y el bloque `uiCommonCheckout` al migrar a esta versión.
+Para desarrollar desde el código fuente, utiliza una compilación compuesta aislada que sustituya
+explícitamente la identidad del módulo publicado. No agregues mavenLocal sin limitar su alcance.
+
+Card Detector y Permissions dependen de UI Common solo en sus aplicaciones de ejemplo. La biblioteca
+Permissions conserva API 24 y no depende de UI Common. Auth utiliza las tarjetas en su biblioteca.

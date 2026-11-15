@@ -2,7 +2,7 @@
 
 Componentes Kotlin/Compose Material 3 para tarjetas, catálogos y códigos de verificación. La aplicación controla el tema, el estado, los textos, la navegación y las operaciones de red.
 
-- [Instalación](installation.md): integración desde el código fuente.
+- [Instalación](installation.md): dependencia publicada e integración desde el código fuente.
 - [Inicio rápido](quickstart.md): tarjeta y campo de código.
 - [API](api.md): componentes y responsabilidades.
 - [Recetas](recipes.md): personalización e integración.
@@ -11,4 +11,4 @@ Componentes Kotlin/Compose Material 3 para tarjetas, catálogos y códigos de ve
 - [Solución de problemas](troubleshooting.md).
 - [Referencia del código](source-reference.md): declaraciones generadas; se muestra en inglés cuando no existe traducción revisada.
 
-Todavía no existe una versión publicada confirmada. Esta documentación describe el código en desarrollo.
+La versión 0.1.0 está confirmada en JitPack. Utiliza las coordenadas exactas de [IMPORT.md](../../IMPORT.md); estas guías actuales también pueden describir trabajo en desarrollo.
