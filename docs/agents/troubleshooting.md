@@ -1,7 +1,7 @@
 # Troubleshooting and limits
 
-- An unresolved UI Common snapshot means a development migration needs its explicit source checkout.
-  Follow installation; no public artifact is assumed.
+- If the dependency cannot be resolved, verify the JitPack repository and exact coordinate in IMPORT.md.
+  Remove the old unpublished snapshot and source-substitution setup when using the confirmed release.
 - A disabled input may reflect enabled=false or a non-null busyMessage. The host clears busy state.
 - Paste filters numeric characters and truncates to codeLength. Clipboard reading requires the paste action.
 - A screen action slot is controlled by its host; disable it explicitly during busy operations.

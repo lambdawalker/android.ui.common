@@ -1,30 +1,27 @@
 # Installation
 
-UI Common requires Android API 28 or later, Java 17 bytecode and a compatible Kotlin/Compose toolchain.
-Its source pins match the established Demo Common toolchain. The sample is not a published artifact.
+UI Common requires Android API 28+, Java 17 bytecode and a compatible Kotlin/Compose toolchain.
+The sample app is not a published artifact.
 
-Read [IMPORT.md](../../IMPORT.md) for confirmed public coordinates. There are none yet. Do not copy
-an anticipated version into a normal dependency declaration and describe it as released.
-
-For coordinated development, check out an exact UI Common commit beside the consumer. In the
-consumer's settings, explicitly opt into a composite build that substitutes the module:
+JitPack release **0.1.0** is confirmed. Add JitPack to the dependency repositories in settings.gradle.kts,
+then add the dependency to the consuming module:
 
 ```kotlin
-providers.gradleProperty("uiCommonCheckout").orNull?.let { checkout ->
-    includeBuild(checkout) {
-        dependencySubstitution {
-            substitute(module("com.apexfission.android:ui-common"))
-                .using(project(":ui-common"))
-        }
-    }
-}
+maven { url = uri("https://jitpack.io") }
 ```
 
-The consumer's migration branch declares `com.apexfission.android:ui-common:0.0.0-SNAPSHOT`
-only as a source-substitution key. Pass `-PuiCommonCheckout=/absolute/path/to/checkout` during
-integration validation. This is not a published snapshot, and migration branches remain blocked
-until a confirmed dependency replaces it. Do not use an unscoped mavenLocal fallback.
+```kotlin
+implementation("com.github.lambdawalker:android.ui.common:ui-common~v0.1.0-jitpack")
+```
 
-After publication, use the exact coordinates in IMPORT.md and remove the requirement for the
-explicit source checkout. Card Detector and Permissions consume UI Common in their sample apps;
-Permissions' API 24 library must remain independent of it.
+[IMPORT.md](../../IMPORT.md) is generated from confirmed release receipts and includes Kotlin DSL,
+Groovy, version-catalog and Maven examples. This release uses JitPack coordinates; the configured
+Central coordinate `com.apexfission.android:ui-common` is not evidence of a Central publication.
+
+Ordinary builds do not require a UI Common checkout or dependency substitution. Remove the temporary
+`0.0.0-SNAPSHOT` substitution key and `uiCommonCheckout` settings block when migrating to this release.
+For intentional source development, use an isolated composite build and substitute the published
+module identity explicitly; do not add an unscoped mavenLocal fallback.
+
+Card Detector and Permissions consume UI Common only in their sample apps. Permissions' API 24
+library remains independent of it. Auth consumes the verification presentation in its library.

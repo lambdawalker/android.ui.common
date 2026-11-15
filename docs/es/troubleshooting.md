@@ -1,6 +1,6 @@
 # Solución de problemas y límites
 
-- Si no se resuelve el snapshot, utiliza el checkout explícito descrito en Instalación; no se supone que exista un artefacto publicado.
+- Si no se resuelve la dependencia, verifica JitPack y las coordenadas exactas de IMPORT.md. Elimina el snapshot anterior y la sustitución de código fuente al usar la versión confirmada.
 - enabled=false o busyMessage no nulo deshabilitan el campo. La aplicación controla cuándo termina la espera.
 - Pegar filtra dígitos y trunca a codeLength. Solo lee el portapapeles al pulsar la acción.
 - Deshabilita explícitamente las acciones de la aplicación durante una operación.

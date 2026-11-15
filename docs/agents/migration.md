@@ -18,5 +18,5 @@ There are no compatibility wrappers. Existing published Demo Common releases rem
 Origins: Demo Common main `00375200862e82da838ee75545c779505cdc8ca0`; Auth migration starts from
 `f356a5b` (including the merged Apache 2.0 license) with the latest onboarding flow. Source attribution is retained in adapted files.
 Card Detector and Permissions migrate sample-only dependency scopes; Auth delegates verification
-presentation while keeping controller/navigation behavior. Consumer migrations remain draft until
-UI Common's first artifact is confirmed; local source substitution validates them beforehand.
+presentation while keeping controller/navigation behavior. Consumers can now use the confirmed JitPack release 0.1.0. Replace temporary source substitution
+with the published dependency in [installation](installation.md), then validate the consumer build.
