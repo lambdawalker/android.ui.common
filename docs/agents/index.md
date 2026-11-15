@@ -1,0 +1,15 @@
+# UI Common
+
+Development Kotlin/Compose Material 3 components for reusable cards, catalogs and verification-code entry.
+The host owns its theme, state, strings, navigation and network operations.
+
+- [Installation](installation.md): source integration and release status.
+- [Quickstart](quickstart.md): a caller-owned verification field/card.
+- [API contracts](api.md): all public components and ownership.
+- [Recipes](recipes.md): catalog actions and host customization.
+- [Testing](testing.md): previews, interaction tests and screenshot evidence.
+- [Migration](migration.md): Demo Common and Auth replacements.
+- [Troubleshooting](troubleshooting.md): input, theme and build limitations.
+- [Source reference](source-reference.md): generated declarations, not a complete semantic contract.
+
+No confirmed release exists. These guides describe development source.

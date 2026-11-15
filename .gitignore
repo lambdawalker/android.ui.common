@@ -1,0 +1,19 @@
+*.iml
+.gradle/
+.kotlin/
+.idea/
+local.properties
+**/build/
+.project/setup/cache/
+.project/docs/cache/
+**/node_modules/
+sites/dist/
+.superpowers/
+/.project/setup/cache/
+/.project/docs/cache/
+
+# Initial renders are candidates until human baseline acceptance.
+**/src/screenshotTestDebug/reference/
+/.project/setup/workflow-generation.lock
+/sites/.astro-app-*/
+/sites/.astro-build-*/
