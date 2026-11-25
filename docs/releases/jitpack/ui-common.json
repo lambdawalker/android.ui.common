@@ -1,27 +1,27 @@
 {
   "artifact": "android.ui.common",
-  "consumer_version": "ui-common~v0.1.0-jitpack",
+  "consumer_version": "ui-common~v0.1.1-jitpack",
   "group": "com.github.lambdawalker",
   "module": "ui-common",
   "phase": "confirmed-public",
   "release_identity": {
-    "fingerprint": "48f004a9d98733dd529a8b4ee5aa4ae3b857f93b1ee55cade93333148aa1c60d",
+    "fingerprint": "d159c42324055c2ba46c08b18567d387b2c5d65a09791d313996420baa7c0c19",
     "module": "ui-common",
     "schema": 1,
-    "source": "4a87e79ab912dc97452b28d6fa2eed26362a3f40",
-    "version": "0.1.0"
+    "source": "84a2dc6586c63350d9d8867f6f7e6d3d9f0309e6",
+    "version": "0.1.1"
   },
   "repository": "jitpack",
   "repository_url": "https://jitpack.io",
   "sha256": {
-    "-javadoc.jar": "783f5f77dd9c1deff61847283c36eb8fa1351351b02164c210238e384f76bb04",
-    "-sources.jar": "b8fdd21dfd43ea5141b11aa9ec1a3ae905930103c7fab8299fc65bf7fea6c5e0",
-    ".aar": "b2c0d22f207c588293a0881dede74a3a8e86e519fe2158776e8cdaaecaf2643f",
-    ".module": "c89df6f6688b11f19b0ea74b5964212cd2c95be58136f7603c01644a37e5586e",
-    ".pom": "4c363e1919d36e124f084f4f33373ed9552bc5197e14e00c0295497a0c4746d0"
+    "-javadoc.jar": "a7128a1780362c051351b0872d135e764c0150a3424b22ca0fa71c15232a6230",
+    "-sources.jar": "3cee1550d1d928659fbb664fbd793d424321dad5b500d6f4cfd2de93da733765",
+    ".aar": "6323b1b882536a3bfb409f2ce889f2a5276e985f838551cf7e783e720dc9385e",
+    ".module": "3b24fd63cad076ba661bc9927b868938b7794d2f01fef0132f496703cb230138",
+    ".pom": "86ebf9fe42e8a9e23c16c1994c8903ba67d4c17269cf661473f1faf612009faf"
   },
-  "source": "4a87e79ab912dc97452b28d6fa2eed26362a3f40",
-  "source_tag": "ui-common/v0.1.0-jitpack",
+  "source": "84a2dc6586c63350d9d8867f6f7e6d3d9f0309e6",
+  "source_tag": "ui-common/v0.1.1-jitpack",
   "upload_protocol": "guard-v1",
   "verification": {
     "asset_rules": {},
@@ -40,7 +40,7 @@
     "required_assets": null
   },
   "verification_schema": 1,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "workflow_attempt": "1",
-  "workflow_run": "43757259419"
+  "workflow_run": "45715151428"
 }
