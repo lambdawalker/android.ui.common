@@ -30,6 +30,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     screenshotTestImplementation(libs.androidx.compose.ui.tooling)
     screenshotTestImplementation(libs.screenshot.validation.api)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation("androidx.test.ext:junit:1.3.0")
