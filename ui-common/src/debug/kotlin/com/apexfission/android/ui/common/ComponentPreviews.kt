@@ -38,8 +38,9 @@ internal fun DetailedVerificationFixture() {
     CodeVerificationCard(
         details = VerificationCardDetails("6 digits", "Confirm access to this email address to continue.", "Awaiting confirmation"),
         value = "", onValueChange = {}, codeLabel = "Confirmation code", codeContentDescription = "Six digit code",
-        pasteLabel = null, instructions = "Enter the 6-digit code sent to your email to continue.",
+        pasteLabel = "Paste code", instructions = "Enter the 6-digit code sent to your email to continue.",
         recipient = "alex.turner@example.invalid",
+        actions = { TextButton({}) { Text("Change destination") } },
     )
 }
 

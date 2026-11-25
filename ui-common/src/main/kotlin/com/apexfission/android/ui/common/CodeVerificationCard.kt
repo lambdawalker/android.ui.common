@@ -80,15 +80,15 @@ public fun CodeVerificationCard(
     supportingContent: (@Composable ColumnScope.() -> Unit)? = null,
     actions: (@Composable ColumnScope.() -> Unit)? = null,
 ) {
+    val editor = rememberCodeEditor(value)
+    val inputEnabled = enabled && busyMessage == null
     Card(modifier.fillMaxWidth(), shape = MaterialTheme.shapes.large,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)) {
         Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             if (!instructions.isNullOrBlank()) Text(instructions, style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant)
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                OneTimeCodeField(value, onValueChange, codeContentDescription, codeLength = codeLength,
-                    enabled = enabled && busyMessage == null, autoFocus = autoFocus, pasteLabel = pasteLabel,
-                    autofillContentType = autofillContentType)
+                CodeInput(editor, onValueChange, codeContentDescription, codeLength, inputEnabled, autoFocus, autofillContentType)
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalAlignment = Alignment.Top) {
                     Text(codeLabel, Modifier.weight(1f), style = MaterialTheme.typography.labelLarge)
@@ -111,6 +111,7 @@ public fun CodeVerificationCard(
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
             supportingContent?.invoke(this)
+            if (pasteLabel != null) CodePasteButton(editor, onValueChange, pasteLabel, codeLength, inputEnabled)
             actions?.invoke(this)
         }
     }

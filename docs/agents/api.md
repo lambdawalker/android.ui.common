@@ -38,9 +38,15 @@ legend below them, and explanation/recipient summary afterward. `VerificationCar
 the detailed overload; the original signature and trailing action lambda remain available. The
 new overload and recipient row are not in the confirmed 0.1.0 artifact. Use source integration
 until a new release is confirmed. Both overloads use host shapes/colors/typography; no brand palette
-is installed. The focused cell has a host-primary outline and grows with scaled text.
+is installed. Paste and caller action buttons appear below the recipient summary.
+
+The focused cell has a host-primary border and tinted fill, plus a caret at a collapsed cursor.
+Tapping a populated cell selects that digit for replacement; typing advances the selection to
+its next populated neighbor or the next empty cell. Tapping beyond the current code places the
+cursor at its end without introducing gaps. Deletion, keyboard selection and external value
+changes keep the highlight aligned with the logical editor. Cells grow with scaled text.
 
 Recipient status never changes merely because all digits are entered. Supply truthful host state,
 not a success icon or link-opened label inferred from code entry. Decorative icon slots should use
 null content descriptions because the adjacent status text supplies their meaning. A null
-`pasteLabel` hides the helper button without reading the clipboard; native field editing remains.
+`pasteLabel` hides the helper button without reading the clipboard; keyboard and accessibility editing remain available.

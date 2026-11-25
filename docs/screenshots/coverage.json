@@ -26,7 +26,10 @@
       "EmptyVerificationScreenshot",
       "PartialVerificationScreenshot",
       "CompleteVerificationScreenshot",
-      "DisabledVerificationScreenshot"
+      "DisabledVerificationScreenshot",
+      "NextDigitFocusScreenshot",
+      "SelectedDigitFocusScreenshot",
+      "CompleteCodeFocusScreenshot"
     ],
     "CodeVerificationCard": [
       "EmptyVerificationScreenshot",
@@ -49,7 +52,8 @@
     "320dp",
     "fontScale 1.6",
     "alternate host colors/shapes/typography",
-    "Spanish sample"
+    "Spanish sample",
+    "cursor at next empty cell, selected middle digit, and complete-code end"
   ],
   "interaction_suite": "ui-common/src/androidTest/kotlin/com/apexfission/android/ui/common/ComponentsTest.kt",
   "note": "Fixture inventory is not evidence of executed device tests or approved screenshot baselines."

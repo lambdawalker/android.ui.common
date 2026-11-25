@@ -27,10 +27,16 @@ debajo, y después la explicación y el resumen del destinatario. `VerificationC
 la sobrecarga detallada; la firma original y su lambda final de acciones siguen disponibles. La nueva
 sobrecarga y la fila del destinatario no existen en el artefacto confirmado 0.1.0. Usa integración
 desde el código fuente hasta confirmar otra versión. Ambas sobrecargas heredan formas, colores y
-tipografía del host; no instalan una paleta de marca. La celda enfocada muestra un contorno con el
-color primario del host y crece con el tamaño de texto.
+tipografía del host; no instalan una paleta de marca. Pegar y las acciones de la aplicación aparecen
+debajo del resumen del destinatario.
+
+La celda enfocada muestra un borde primario y fondo coloreado, además de un cursor cuando no hay
+selección. Al tocar un dígito se selecciona para sustituirlo; al escribir, la selección avanza al
+siguiente dígito o a la siguiente celda vacía. Tocar más allá del código coloca el cursor al final,
+sin crear huecos. Borrar, seleccionar con el teclado y cambiar el valor externo mantienen el
+indicador alineado con el editor lógico. Las celdas crecen con el tamaño del texto.
 
 El estado del destinatario no cambia por introducir todos los dígitos. Proporciona estado real del
 host; no deduzcas éxito o apertura del enlace a partir del código. Los iconos decorativos deben tener
 una descripción nula porque el texto contiguo comunica su significado. `pasteLabel` nulo oculta el
-botón auxiliar sin leer el portapapeles; la edición nativa del campo permanece disponible.
+botón auxiliar sin leer el portapapeles; la edición con teclado y accesibilidad permanece disponible.

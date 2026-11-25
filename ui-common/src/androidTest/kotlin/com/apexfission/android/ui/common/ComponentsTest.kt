@@ -1,17 +1,28 @@
 package com.apexfission.android.ui.common
 
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.graphics.toPixelMap
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 
+@OptIn(ExperimentalTestApi::class)
 class ComponentsTest {
     @get:Rule val compose = createComposeRule()
 
@@ -117,4 +128,89 @@ class ComponentsTest {
         compose.runOnIdle { assertEquals("123456", code); status = "Host supplied status" }
         compose.onNodeWithText("Host supplied status").assertIsDisplayed()
     }
+    @Test fun tappingCellsReplacesDigitsAndMovesTheVisibleSelection() {
+        var code by mutableStateOf("123456")
+        var density = 1f
+        val primary = Color(0xFF2368BC)
+        compose.setContent { MaterialTheme(colorScheme = lightColorScheme(primary = primary)) {
+            density = LocalDensity.current.density
+            OneTimeCodeField(code, { code = it }, "Code")
+        } }
+        val field = compose.onNodeWithContentDescription("Code")
+        compose.onAllNodes(hasSetTextAction()).assertCountEquals(1)
+        field.performTouchInput { click(Offset(width * 2.5f / 6, height / 2f)) }
+        field.assertIsFocused().assert(SemanticsMatcher.expectValue(SemanticsProperties.TextSelectionRange, TextRange(2, 3)))
+        assertActiveCell(field, 2, density, primary)
+        field.performTextInput("9")
+        compose.runOnIdle { assertEquals("129456", code) }
+        field.assert(SemanticsMatcher.expectValue(SemanticsProperties.TextSelectionRange, TextRange(3, 4)))
+        assertActiveCell(field, 3, density, primary)
+        field.performTextInput("8")
+        compose.runOnIdle { assertEquals("129856", code) }
+        assertActiveCell(field, 4, density, primary)
+        field.performKeyInput { pressKey(Key.Backspace) }
+        compose.runOnIdle { assertEquals("12986", code) }
+        field.assert(SemanticsMatcher.expectValue(SemanticsProperties.TextSelectionRange, TextRange(4)))
+        assertActiveCell(field, 4, density, primary)
+    }
+
+    @Test fun tappingAnEmptyCellTargetsTheNextDigitAndTypingAdvancesTheOutline() {
+        var code by mutableStateOf("12")
+        var density = 1f
+        val primary = Color(0xFF2368BC)
+        compose.setContent { MaterialTheme(colorScheme = lightColorScheme(primary = primary)) {
+            density = LocalDensity.current.density
+            OneTimeCodeField(code, { code = it }, "Code")
+        } }
+        val field = compose.onNodeWithContentDescription("Code")
+        field.performTouchInput { click(Offset(width * 5.5f / 6, height / 2f)) }
+        field.assert(SemanticsMatcher.expectValue(SemanticsProperties.TextSelectionRange, TextRange(2)))
+        assertActiveCell(field, 2, density, primary)
+        field.performTextInput("3")
+        compose.runOnIdle { assertEquals("123", code) }
+        assertActiveCell(field, 3, density, primary)
+        compose.runOnIdle { code = "" }
+        field.assert(SemanticsMatcher.expectValue(SemanticsProperties.TextSelectionRange, TextRange.Zero))
+        assertActiveCell(field, 0, density, primary)
+    }
+
+    @Suppress("DEPRECATION")
+    @Test fun cardActionsSitBelowRecipientAndPasteKeepsTheCodeEditable() {
+        var code by mutableStateOf("")
+        var changes = 0
+        compose.setContent { MaterialTheme {
+            val clipboard = LocalClipboardManager.current
+            SideEffect { clipboard.setText(AnnotatedString("12 34-56")) }
+            CodeVerificationCard(
+                details = VerificationCardDetails(recipientStatus = "Awaiting confirmation"),
+                value = code, onValueChange = { code = it }, codeLabel = "Confirmation code",
+                codeContentDescription = "Code", pasteLabel = "Paste code", recipient = "name@example.invalid",
+                actions = { TextButton(onClick = { changes++ }) { Text("Change destination") } },
+            )
+        } }
+        val recipient = compose.onNodeWithText("Awaiting confirmation").fetchSemanticsNode().boundsInRoot
+        val paste = compose.onNodeWithText("Paste code")
+        val change = compose.onNodeWithText("Change destination")
+        assertTrue(paste.fetchSemanticsNode().boundsInRoot.top > recipient.bottom)
+        assertTrue(change.fetchSemanticsNode().boundsInRoot.top > recipient.bottom)
+        compose.runOnIdle { assertEquals("", code) }
+        paste.performClick()
+        compose.runOnIdle { assertEquals("123456", code) }
+        compose.onNodeWithContentDescription("Code").assertIsFocused()
+        change.performClick()
+        compose.runOnIdle { assertEquals(1, changes) }
+    }
+
+    private fun assertActiveCell(field: SemanticsNodeInteraction, index: Int, density: Float, primary: Color) {
+        val pixels = field.captureToImage().toPixelMap()
+        val gap = 8 * density
+        val width = (pixels.width - 5 * gap) / 6
+        for (cell in 0..5) {
+            val x = (cell * (width + gap) + density).toInt()
+            val border = pixels[x, pixels.height / 2].toArgb()
+            if (cell == index) assertEquals("Active cell ${cell + 1} has the host-primary border", primary.toArgb(), border)
+            else assertTrue("Cell ${cell + 1} is not highlighted", border != primary.toArgb())
+        }
+    }
+
 }
