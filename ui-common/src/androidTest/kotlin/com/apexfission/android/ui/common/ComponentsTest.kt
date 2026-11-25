@@ -6,7 +6,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -130,48 +129,44 @@ class ComponentsTest {
     }
     @Test fun tappingCellsReplacesDigitsAndMovesTheVisibleSelection() {
         var code by mutableStateOf("123456")
-        var density = 1f
         val primary = Color(0xFF2368BC)
         compose.setContent { MaterialTheme(colorScheme = lightColorScheme(primary = primary)) {
-            density = LocalDensity.current.density
             OneTimeCodeField(code, { code = it }, "Code")
         } }
         val field = compose.onNodeWithContentDescription("Code")
         compose.onAllNodes(hasSetTextAction()).assertCountEquals(1)
         field.performTouchInput { click(Offset(width * 2.5f / 6, height / 2f)) }
         field.assertIsFocused().assert(SemanticsMatcher.expectValue(SemanticsProperties.TextSelectionRange, TextRange(2, 3)))
-        assertActiveCell(field, 2, density, primary)
+        assertActiveCell(field, 2, primary)
         field.performTextInput("9")
         compose.runOnIdle { assertEquals("129456", code) }
         field.assert(SemanticsMatcher.expectValue(SemanticsProperties.TextSelectionRange, TextRange(3, 4)))
-        assertActiveCell(field, 3, density, primary)
+        assertActiveCell(field, 3, primary)
         field.performTextInput("8")
         compose.runOnIdle { assertEquals("129856", code) }
-        assertActiveCell(field, 4, density, primary)
+        assertActiveCell(field, 4, primary)
         field.performKeyInput { pressKey(Key.Backspace) }
         compose.runOnIdle { assertEquals("12986", code) }
         field.assert(SemanticsMatcher.expectValue(SemanticsProperties.TextSelectionRange, TextRange(4)))
-        assertActiveCell(field, 4, density, primary)
+        assertActiveCell(field, 4, primary)
     }
 
     @Test fun tappingAnEmptyCellTargetsTheNextDigitAndTypingAdvancesTheOutline() {
         var code by mutableStateOf("12")
-        var density = 1f
         val primary = Color(0xFF2368BC)
         compose.setContent { MaterialTheme(colorScheme = lightColorScheme(primary = primary)) {
-            density = LocalDensity.current.density
             OneTimeCodeField(code, { code = it }, "Code")
         } }
         val field = compose.onNodeWithContentDescription("Code")
         field.performTouchInput { click(Offset(width * 5.5f / 6, height / 2f)) }
         field.assert(SemanticsMatcher.expectValue(SemanticsProperties.TextSelectionRange, TextRange(2)))
-        assertActiveCell(field, 2, density, primary)
+        assertActiveCell(field, 2, primary)
         field.performTextInput("3")
         compose.runOnIdle { assertEquals("123", code) }
-        assertActiveCell(field, 3, density, primary)
+        assertActiveCell(field, 3, primary)
         compose.runOnIdle { code = "" }
         field.assert(SemanticsMatcher.expectValue(SemanticsProperties.TextSelectionRange, TextRange.Zero))
-        assertActiveCell(field, 0, density, primary)
+        assertActiveCell(field, 0, primary)
     }
 
     @Suppress("DEPRECATION")
@@ -201,16 +196,15 @@ class ComponentsTest {
         compose.runOnIdle { assertEquals(1, changes) }
     }
 
-    private fun assertActiveCell(field: SemanticsNodeInteraction, index: Int, density: Float, primary: Color) {
+    private fun assertActiveCell(field: SemanticsNodeInteraction, index: Int, primary: Color) {
         val pixels = field.captureToImage().toPixelMap()
-        val gap = 8 * density
-        val width = (pixels.width - 5 * gap) / 6
-        for (cell in 0..5) {
-            val x = (cell * (width + gap) + density).toInt()
-            val border = pixels[x, pixels.height / 2].toArgb()
-            if (cell == index) assertEquals("Active cell ${cell + 1} has the host-primary border", primary.toArgb(), border)
-            else assertTrue("Cell ${cell + 1} is not highlighted", border != primary.toArgb())
-        }
+        val border = (0 until pixels.width).filter { x -> pixels[x, pixels.height / 2].toArgb() == primary.toArgb() }
+        assertTrue("Active cell has a visible host-primary border", border.isNotEmpty())
+        // Pixel rounding and capture density vary by device. Both sides of the outline must
+        // surround the active cell, and no primary-colored pixels may appear in other cells.
+        val cellWidth = pixels.width / 6f
+        assertTrue("Outline spans both sides of cell ${index + 1}: $border", border.last() - border.first() > cellWidth * 0.75f)
+        assertTrue("Outline begins in cell ${index + 1}: $border", border.first() >= index * cellWidth)
+        assertTrue("Outline ends in cell ${index + 1}: $border", border.last() < (index + 1) * cellWidth)
     }
-
 }

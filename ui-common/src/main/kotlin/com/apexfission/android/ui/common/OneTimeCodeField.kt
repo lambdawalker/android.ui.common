@@ -148,7 +148,7 @@ internal fun CodeInputCells(value: String, selection: TextRange, codeLength: Int
                         color = if (active) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface,
                         style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
                     if (active && selection.collapsed) Box(
-                        Modifier.align(if (index < value.length) Alignment.CenterStart else if (index < selection.start) Alignment.CenterEnd else Alignment.Center)
+                        Modifier.align(if (index < selection.start) Alignment.CenterEnd else if (index < value.length) Alignment.CenterStart else Alignment.Center)
                             .padding(horizontal = 5.dp).width(2.dp).height(24.dp)
                             .background(MaterialTheme.colorScheme.primary)
                     )

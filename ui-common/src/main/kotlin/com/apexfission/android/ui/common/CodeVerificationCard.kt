@@ -111,8 +111,10 @@ public fun CodeVerificationCard(
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
             supportingContent?.invoke(this)
-            if (pasteLabel != null) CodePasteButton(editor, onValueChange, pasteLabel, codeLength, inputEnabled)
-            actions?.invoke(this)
+            if (pasteLabel != null || actions != null) Column(Modifier.fillMaxWidth()) {
+                if (pasteLabel != null) CodePasteButton(editor, onValueChange, pasteLabel, codeLength, inputEnabled)
+                actions?.invoke(this)
+            }
         }
     }
 }
