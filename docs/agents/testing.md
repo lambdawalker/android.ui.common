@@ -18,7 +18,10 @@ Connected tests require an emulator/device. Screenshot validation compares revie
 initial rendered output is a candidate, not an accepted baseline. See [screenshot policy](../screenshots/README.md)
 for rendering and intentional acceptance. Do not refresh baselines merely to silence a difference.
 Unit tests cover normalization; Compose tests cover callbacks, semantics, input and explicit paste.
-The sample device tests check the top App settings intent, return and recreation. The detailed card test checks one logical input and host-owned recipient status.
+The sample device tests check the top App settings intent, return and recreation. The detailed card
+tests check one logical input, host-owned recipient status and actions below the recipient. Input
+tests tap individual cells, replace digits, delete and paste. They inspect selection semantics and
+rendered border pixels to verify that the visible highlight follows the actual editing position.
 Host screenshots do not prove system autofill, IME or physical-device behavior.
 
 ## Rendered examples
@@ -30,3 +33,10 @@ not approved regression baselines or evidence of device autofill behavior.
 ![Detailed verification card, dark host](../assets/screenshots/verification-dark.png)
 ![Alternate host, 320dp and large text](../assets/screenshots/alternate-host.png)
 ![Catalog primitives](../assets/screenshots/components-light.png)
+
+| Next empty digit | Editing the third digit |
+| --- | --- |
+| ![Caret and border at the next empty cell](../assets/screenshots/focus-next-dark.png) | ![Selected third digit with a border and tinted fill](../assets/screenshots/focus-selected-dark.png) |
+
+These focused-state illustrations use the same cell renderer as the logical input. Device tests
+separately exercise real taps and typing; the illustrations do not substitute for interaction tests.

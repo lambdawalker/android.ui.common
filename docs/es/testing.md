@@ -14,7 +14,7 @@ sh ./docs.sh build --check --base /android.ui.common/
 
 Las pruebas conectadas necesitan un emulador o dispositivo. La validación visual compara referencias revisadas; una imagen recién generada es una candidata, no una referencia aprobada. Consulta la [política de capturas](../screenshots/README.md). No actualices referencias solo para ocultar diferencias.
 
-Las pruebas unitarias cubren la normalización; las de Compose cubren callbacks, semántica, entrada y pegado explícito. Las pruebas del ejemplo comprueban App settings, su destino, el regreso y la recreación. La tarjeta detallada comprueba un único campo lógico y el estado controlado por el host. Las capturas no demuestran el comportamiento del autocompletado del sistema, el teclado ni los dispositivos físicos.
+Las pruebas unitarias cubren la normalización; las de Compose cubren callbacks, semántica, entrada y pegado explícito. Las pruebas del ejemplo comprueban App settings, su destino, el regreso y la recreación. La tarjeta detallada comprueba un único campo lógico, el estado controlado por el host y las acciones debajo del destinatario. Las pruebas de entrada tocan celdas, sustituyen dígitos, borran y pegan; comprueban la selección y los píxeles del borde para verificar que el indicador sigue la posición de edición. Las capturas no demuestran el comportamiento del autocompletado del sistema, el teclado ni los dispositivos físicos.
 
 ## Ejemplos renderizados
 
@@ -25,3 +25,10 @@ visuales aprobadas ni evidencia del autocompletado en dispositivos.
 ![Tarjeta detallada con tema oscuro](../assets/screenshots/verification-dark.png)
 ![Tema alternativo, 320dp y texto grande](../assets/screenshots/alternate-host.png)
 ![Componentes del catálogo](../assets/screenshots/components-light.png)
+
+| Siguiente dígito vacío | Edición del tercer dígito |
+| --- | --- |
+| ![Cursor y borde en la siguiente celda vacía](../assets/screenshots/focus-next-dark.png) | ![Tercer dígito seleccionado con borde y fondo coloreado](../assets/screenshots/focus-selected-dark.png) |
+
+Estas ilustraciones usan el mismo renderizador de celdas que el campo lógico. Las pruebas en
+dispositivo ejecutan toques y escritura reales; las ilustraciones no sustituyen esas pruebas.

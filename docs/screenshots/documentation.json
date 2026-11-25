@@ -2,25 +2,25 @@
   "captures": [
     {
       "path": "docs/assets/screenshots/verification-light.png",
-      "image_sha256": "69316b3bbc38d5c3a4497374327145b9d0ddacc72da2e020bdcdd0d65211c0de",
+      "image_sha256": "f5634a14b9b499e69e6781b168465f0d8af428d949fe73ab92e70f9b5f032005",
       "width": 1032,
-      "height": 832,
+      "height": 1126,
       "fixture": "DetailedVerificationScreenshot_detailed-light_68a39cc6_0.png",
       "status": "documentation illustration; not an accepted regression baseline"
     },
     {
       "path": "docs/assets/screenshots/verification-dark.png",
-      "image_sha256": "feb996a68b6bce88c1b68ff3887e4add85d92c579fc3340e2c12249577cbe168",
+      "image_sha256": "e1feef8d3899ac1a9eb7fcdc7e66901e31ba0c55c79e5656da4471c40d1147b4",
       "width": 1032,
-      "height": 832,
+      "height": 1126,
       "fixture": "DetailedVerificationScreenshot_detailed-dark_d30d5f2b_0.png",
       "status": "documentation illustration; not an accepted regression baseline"
     },
     {
       "path": "docs/assets/screenshots/alternate-host.png",
-      "image_sha256": "9d298f8e07a257807c5382536f23fc244373af4747642429233a0fd1b5ad14da",
+      "image_sha256": "4042774da7ac8905e83ec9069ad0361984b093725f4372df8302e4afa2226194",
       "width": 840,
-      "height": 1603,
+      "height": 1582,
       "fixture": "AlternateHostScreenshot_host-theme-narrow-large_6d9ef005_0.png",
       "status": "documentation illustration; not an accepted regression baseline"
     },
@@ -31,9 +31,25 @@
       "height": 1502,
       "fixture": "ComponentsScreenshot_components-light_224a804e_0.png",
       "status": "documentation illustration; not an accepted regression baseline"
+    },
+    {
+      "path": "docs/assets/screenshots/focus-next-dark.png",
+      "fixture": "NextDigitFocusScreenshot_focus-next-dark_9763d49f_0.png",
+      "status": "documentation illustration; not an accepted regression baseline",
+      "image_sha256": "0eb969ac622d9fe8d2aaa0974915a9b55a7a0ccf90a5277c04d96ee44f53ef6b",
+      "width": 1032,
+      "height": 131
+    },
+    {
+      "path": "docs/assets/screenshots/focus-selected-dark.png",
+      "fixture": "SelectedDigitFocusScreenshot_focus-selected-dark_d5258825_0.png",
+      "status": "documentation illustration; not an accepted regression baseline",
+      "image_sha256": "69da1799c75e7cba1665fe43ae938fdae7c4a99f13ebbb5007dfd9d361f9e3b6",
+      "width": 1032,
+      "height": 131
     }
   ],
-  "source_revision": "fc8e6e5c24b38def1e00b36bf6dcecbaf73d9b03",
-  "workflow_run": "https://github.com/lambdawalker/android.ui.common/actions/runs/45689505353",
-  "review": "Visually inspected documentation illustrations; full-suite regression baseline acceptance remains pending."
+  "source_revision": "66e66710e9e3337615a39ecbfb6269c30ebe5377",
+  "workflow_run": "https://github.com/lambdawalker/android.ui.common/actions/runs/45695060805",
+  "review": "Documentation illustrations reviewed for restored actions, cursor and selection indication, host-theme inheritance and narrow/large-text layout. Full-suite regression baseline acceptance remains pending."
 }
