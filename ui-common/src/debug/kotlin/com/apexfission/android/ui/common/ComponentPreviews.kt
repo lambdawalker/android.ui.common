@@ -33,6 +33,16 @@ internal fun VerificationFixture(code: String = "", error: Boolean = false, busy
         actions = { TextButton({}, enabled = enabled && !busy, shape = MaterialTheme.shapes.small) { Text("Change destination") } })
 }
 
+@Composable
+internal fun DetailedVerificationFixture() {
+    CodeVerificationCard(
+        details = VerificationCardDetails("6 digits", "Confirm access to this email address to continue.", "Awaiting confirmation"),
+        value = "", onValueChange = {}, codeLabel = "Confirmation code", codeContentDescription = "Six digit code",
+        pasteLabel = null, instructions = "Enter the 6-digit code sent to your email to continue.",
+        recipient = "alex.turner@example.invalid",
+    )
+}
+
 @Preview(name = "verification-light", widthDp = 393)
 @Preview(name = "verification-dark", widthDp = 393, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable

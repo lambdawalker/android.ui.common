@@ -1,6 +1,9 @@
 package com.apexfission.android.ui.common.sample
 
 import android.content.res.Configuration
+import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,7 +22,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent { SampleTheme { ComponentCatalog() } }
+        setContent { SampleTheme { ComponentCatalog(onOpenSettings = {
+            startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", packageName, null)))
+        }) } }
     }
 }
 
@@ -30,14 +35,21 @@ internal fun SampleTheme(content: @Composable () -> Unit) {
 
 /** Offline stateful demo; callbacks simulate UI state only, never server verification. */
 @Composable
-internal fun ComponentCatalog() {
+internal fun ComponentCatalog(onOpenSettings: () -> Unit = {}) {
     var code by rememberSaveable { mutableStateOf("") }
     var mode by rememberSaveable { mutableIntStateOf(0) }
     var clicked by rememberSaveable { mutableStateOf(false) }
     val modeLabel = stringResource(listOf(R.string.mode_normal, R.string.mode_error, R.string.mode_busy, R.string.mode_disabled)[mode])
-    CatalogScreen(title = stringResource(R.string.app_name), description = stringResource(R.string.catalog_description)) {
+    CatalogScreen(title = stringResource(R.string.app_name), description = stringResource(R.string.catalog_description),
+        headerActions = {
+            OutlinedButton(onClick = onOpenSettings, modifier = Modifier.fillMaxWidth(), shape = MaterialTheme.shapes.small) {
+                Text(stringResource(R.string.app_settings))
+            }
+        }) {
         item {
             CodeVerificationCard(
+                details = VerificationCardDetails(stringResource(R.string.code_length),
+                    stringResource(R.string.explanation), stringResource(R.string.recipient_status)),
                 value = code, onValueChange = { code = it },
                 codeLabel = stringResource(R.string.code_label),
                 codeContentDescription = stringResource(R.string.code_description),

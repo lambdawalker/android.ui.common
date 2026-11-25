@@ -2,6 +2,7 @@
 package com.apexfission.android.ui.common
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
@@ -13,6 +14,7 @@ import androidx.compose.ui.autofill.contentType
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalAutofillManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -42,6 +44,7 @@ public fun OneTimeCodeField(
 ) {
     require(codeLength > 0) { "codeLength must be positive" }
     val focus = remember { FocusRequester() }
+    var focused by remember { mutableStateOf(false) }
     val clipboard = LocalClipboardManager.current
     val autofillManager = LocalAutofillManager.current
     val update: (String) -> Unit = { raw ->
@@ -59,17 +62,20 @@ public fun OneTimeCodeField(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             singleLine = true,
             modifier = Modifier.fillMaxWidth().heightIn(min = 50.dp).focusRequester(focus)
+                .onFocusChanged { focused = it.isFocused }
                 .then(if (autofillContentType != null) Modifier.contentType(autofillContentType) else Modifier)
                 .semantics { this.contentDescription = contentDescription },
             decorationBox = { innerTextField ->
                 Box(Modifier.fillMaxWidth()) {
                     Row(Modifier.fillMaxWidth().clearAndSetSemantics {},
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         repeat(codeLength) { index ->
                             Surface(modifier = Modifier.weight(1f).heightIn(min = 50.dp),
-                                color = MaterialTheme.colorScheme.surfaceContainerHigh,
-                                shape = MaterialTheme.shapes.extraSmall) {
-                                Box(contentAlignment = Alignment.Center) {
+                                color = MaterialTheme.colorScheme.surfaceContainer,
+                                border = if (focused && enabled && index == value.length.coerceAtMost(codeLength - 1))
+                                    BorderStroke(2.dp, MaterialTheme.colorScheme.primary) else null,
+                                shape = MaterialTheme.shapes.small) {
+                                Box(Modifier.padding(vertical = 8.dp), contentAlignment = Alignment.Center) {
                                     Text(value.getOrNull(index)?.toString() ?: "",
                                         color = MaterialTheme.colorScheme.onSurface,
                                         style = MaterialTheme.typography.titleLarge,

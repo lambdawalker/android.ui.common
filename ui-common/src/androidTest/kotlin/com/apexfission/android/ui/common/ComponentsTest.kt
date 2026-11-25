@@ -96,4 +96,25 @@ class ComponentsTest {
         compose.onNodeWithContentDescription("Code").assertIsEnabled()
         compose.onNodeWithText("Paste").assertIsEnabled()
     }
+
+    @Test fun detailedCardKeepsOneFieldAndHostOwnedRecipientStatus() {
+        var code by mutableStateOf("")
+        var status by mutableStateOf("Awaiting confirmation")
+        compose.setContent { MaterialTheme {
+            CodeVerificationCard(
+                details = VerificationCardDetails("6 digits", "Confirm access to continue.", status),
+                value = code, onValueChange = { code = it }, codeLabel = "Confirmation code",
+                codeContentDescription = "Code", pasteLabel = null,
+                recipient = "name@example.invalid",
+            )
+        } }
+        compose.onAllNodes(hasSetTextAction()).assertCountEquals(1)
+        compose.onNodeWithText("6 digits").assertIsDisplayed()
+        compose.onNodeWithText("name@example.invalid").assertIsDisplayed()
+        compose.onNodeWithText("Awaiting confirmation").assertIsDisplayed()
+        compose.onNodeWithContentDescription("Code").performTextInput("123456")
+        compose.onNodeWithText("Awaiting confirmation").assertIsDisplayed()
+        compose.runOnIdle { assertEquals("123456", code); status = "Host supplied status" }
+        compose.onNodeWithText("Host supplied status").assertIsDisplayed()
+    }
 }

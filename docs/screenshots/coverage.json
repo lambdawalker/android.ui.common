@@ -35,7 +35,12 @@
       "ErrorVerificationScreenshot",
       "BusyVerificationScreenshot",
       "DisabledVerificationScreenshot",
-      "AlternateHostScreenshot"
+      "AlternateHostScreenshot",
+      "DetailedVerificationScreenshot"
+    ],
+    "VerificationRecipientRow": [
+      "DetailedVerificationScreenshot",
+      "EmptyVerificationScreenshot"
     ]
   },
   "variations": [

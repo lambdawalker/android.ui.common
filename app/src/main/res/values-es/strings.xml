@@ -1,4 +1,8 @@
 <resources>
+    <string name="app_settings">Ajustes de la aplicación</string>
+    <string name="code_length">6 dígitos</string>
+    <string name="explanation">Confirma el acceso a esta dirección de correo para continuar.</string>
+    <string name="recipient_status">Destinatario de ejemplo</string>
     <string name="app_name">UI Common</string>
     <string name="catalog_description">Componentes reutilizables con el tema de tu aplicación.</string>
     <string name="verification">Verificación de código</string>

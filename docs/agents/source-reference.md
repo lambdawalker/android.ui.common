@@ -103,6 +103,7 @@ package com.apexfission.android.ui.common
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.semantics.LiveRegionMode
@@ -110,6 +111,11 @@ import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 
+public data class VerificationCardDetails(
+    val codeLengthLabel: String? = null,
+    val explanation: String? = null,
+    val recipientStatus: String? = null,
+)
 @Composable
 public fun CodeVerificationCard(
     value: String,
@@ -128,6 +134,36 @@ public fun CodeVerificationCard(
     errorMessage: String? = null,
     supportingContent: (@Composable ColumnScope.() -> Unit)? = null,
     actions: (@Composable ColumnScope.() -> Unit)? = null,
+)
+@Composable
+public fun CodeVerificationCard(
+    details: VerificationCardDetails,
+    value: String,
+    onValueChange: (String) -> Unit,
+    codeLabel: String,
+    codeContentDescription: String,
+    pasteLabel: String?,
+    modifier: Modifier = Modifier,
+    instructions: String? = null,
+    recipient: String? = null,
+    codeLength: Int = 6,
+    enabled: Boolean = true,
+    autoFocus: Boolean = false,
+    autofillContentType: ContentType? = null,
+    busyMessage: String? = null,
+    errorMessage: String? = null,
+    recipientLeadingIcon: (@Composable () -> Unit)? = null,
+    recipientTrailingIcon: (@Composable () -> Unit)? = null,
+    supportingContent: (@Composable ColumnScope.() -> Unit)? = null,
+    actions: (@Composable ColumnScope.() -> Unit)? = null,
+)
+@Composable
+public fun VerificationRecipientRow(
+    recipient: String,
+    status: String? = null,
+    modifier: Modifier = Modifier,
+    leadingIcon: (@Composable () -> Unit)? = null,
+    trailingIcon: (@Composable () -> Unit)? = null,
 )
 ```
 
@@ -194,6 +230,7 @@ public fun EmptyStateCard(
 ```kotlin
 package com.apexfission.android.ui.common
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
@@ -205,6 +242,7 @@ import androidx.compose.ui.autofill.contentType
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalAutofillManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.semantics.clearAndSetSemantics
