@@ -1,4 +1,8 @@
 <resources>
+    <string name="app_settings">App settings</string>
+    <string name="code_length">6 digits</string>
+    <string name="explanation">Confirm access to this email address to continue.</string>
+    <string name="recipient_status">Sample recipient</string>
     <string name="app_name">UI Common</string>
     <string name="catalog_description">Reusable components using your app’s theme.</string>
     <string name="verification">Code verification</string>

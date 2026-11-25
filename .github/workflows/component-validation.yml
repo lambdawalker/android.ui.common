@@ -21,7 +21,7 @@ jobs:
           log-accepted-android-sdk-licenses: false
       - uses: gradle/actions/setup-gradle@v5
       - name: Compile, unit test and lint
-        run: ./gradlew :ui-common:testDebugUnitTest :ui-common:lintDebug :app:lintDebug :app:assembleDebug :ui-common:assembleDebugAndroidTest --no-daemon
+        run: ./gradlew :ui-common:testDebugUnitTest :ui-common:lintDebug :app:lintDebug :app:assembleDebug :ui-common:assembleDebugAndroidTest :app:assembleDebugAndroidTest --no-daemon
       - name: Render candidates (not accepted regression baselines)
         run: ./gradlew :ui-common:updateDebugScreenshotTest :app:updateDebugScreenshotTest --no-daemon
       - uses: actions/upload-artifact@v4
@@ -56,11 +56,16 @@ jobs:
       - uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 35
+          target: google_apis
           arch: x86_64
           disable-animations: true
-          script: ./gradlew :ui-common:connectedDebugAndroidTest --no-daemon
+          script: ./gradlew :ui-common:connectedDebugAndroidTest :app:connectedDebugAndroidTest --no-daemon
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: component-interaction-reports
-          path: ui-common/build/reports/androidTests
+          path: |
+            ui-common/build/reports/androidTests
+            ui-common/build/outputs/androidTest-results
+            app/build/reports/androidTests
+            app/build/outputs/androidTest-results

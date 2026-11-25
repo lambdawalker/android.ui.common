@@ -12,6 +12,8 @@ active MaterialTheme. No component installs a runtime theme or knows about an au
 | CatalogScreen | Title/description, eyebrow, width/padding/insets, header actions, empty-state slot and lazy content |
 | OneTimeCodeField | Caller-owned value/change callback, code length (positive, default 6), enabled/autofocus, accessibility label, optional paste/autofill |
 | CodeVerificationCard | Field parameters plus instructions/recipient, busy/error messages, supporting content and actions |
+| VerificationCardDetails | Host-resolved code-length legend, explanation and recipient status for the detailed card overload |
+| VerificationRecipientRow | Wrapping recipient and optional status, with decorative leading/trailing icon slots |
 
 CatalogScreen consumes scaffold insets once and adds caller padding. Its description is hidden
 when `showEmptyState` is true; callers supply the matching empty-state slot. Content remains a
@@ -30,3 +32,21 @@ device validation. No input is automatically submitted when it reaches the confi
 CodeVerificationCard disables its field/paste when busyMessage is non-null. Its composable action
 slots remain host-owned; explicitly disable those actions when required. Supporting/error messages
 are presentation, not server state. Nothing in this module persists credentials or starts network work.
+
+The Development card layout places instructions above the rounded code cells, the label/length
+legend below them, and explanation/recipient summary afterward. `VerificationCardDetails` selects
+the detailed overload; the original signature and trailing action lambda remain available. The
+new overload and recipient row are not in the confirmed 0.1.0 artifact. Use source integration
+until a new release is confirmed. Both overloads use host shapes/colors/typography; no brand palette
+is installed. Paste and caller action buttons appear below the recipient summary.
+
+The focused cell has a host-primary border and tinted fill, plus a caret at a collapsed cursor.
+Tapping a populated cell selects that digit for replacement; typing advances the selection to
+its next populated neighbor or the next empty cell. Tapping beyond the current code places the
+cursor at its end without introducing gaps. Deletion, keyboard selection and external value
+changes keep the highlight aligned with the logical editor. Cells grow with scaled text.
+
+Recipient status never changes merely because all digits are entered. Supply truthful host state,
+not a success icon or link-opened label inferred from code entry. Decorative icon slots should use
+null content descriptions because the adjacent status text supplies their meaning. A null
+`pasteLabel` hides the helper button without reading the clipboard; keyboard and accessibility editing remain available.

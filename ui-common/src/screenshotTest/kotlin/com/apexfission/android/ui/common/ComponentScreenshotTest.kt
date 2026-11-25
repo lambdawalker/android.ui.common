@@ -2,6 +2,7 @@ package com.apexfission.android.ui.common
 
 import android.content.res.Configuration
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.tooling.preview.Preview
 import com.android.tools.screenshot.PreviewTest
 
@@ -66,3 +67,29 @@ fun EmptyCatalogScreenshot() { PreviewHost {
     CatalogScreen("Catalog", "Hidden instruction", showEmptyState = true,
         emptyState = { EmptyStateCard("No items", "Your items will appear here.") })
 } }
+
+@PreviewTest
+@Preview(name = "detailed-light", widthDp = 393)
+@Preview(name = "detailed-dark", widthDp = 393, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "detailed-narrow-large", widthDp = 320, fontScale = 1.6f)
+@Preview(name = "detailed-narrow-large-dark", widthDp = 320, fontScale = 1.6f, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun DetailedVerificationScreenshot() { PreviewHost { DetailedVerificationFixture() } }
+
+@PreviewTest
+@Preview(name = "focus-next-light", widthDp = 393)
+@Preview(name = "focus-next-dark", widthDp = 393, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun NextDigitFocusScreenshot() { PreviewHost { CodeInputCells("123", TextRange(3), 6, true) } }
+
+@PreviewTest
+@Preview(name = "focus-selected-light", widthDp = 393)
+@Preview(name = "focus-selected-dark", widthDp = 393, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun SelectedDigitFocusScreenshot() { PreviewHost { CodeInputCells("123456", TextRange(2, 3), 6, true) } }
+
+@PreviewTest
+@Preview(name = "focus-end-light", widthDp = 393)
+@Preview(name = "focus-end-dark", widthDp = 393, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun CompleteCodeFocusScreenshot() { PreviewHost { CodeInputCells("123456", TextRange(6), 6, true) } }

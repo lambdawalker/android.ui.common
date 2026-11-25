@@ -12,6 +12,18 @@ Reusable Material 3 Compose cards, catalogs and verification-code entry that inh
 | CatalogScreen | Centered scrolling catalog with header/empty-state slots |
 | OneTimeCodeField | One logical numeric field with visual slots and explicit paste |
 | CodeVerificationCard | Full verification card with host-owned messages/actions |
+| VerificationRecipientRow | Wrapping recipient/status summary with optional decorative icons (Development) |
+
+The detailed `VerificationCardDetails` overload is **Development source**, pending a new release;
+it is not available in the confirmed 0.1.0 artifact. The original card signature remains supported.
+
+| Detailed card, light | Detailed card, dark |
+| --- | --- |
+| ![Development verification card in light mode](docs/assets/screenshots/verification-light.png) | ![Development verification card in dark mode](docs/assets/screenshots/verification-dark.png) |
+
+These are synthetic rendered documentation illustrations, not accepted regression baselines.
+See [capture provenance](docs/screenshots/documentation.json). The sample also exposes **App settings**
+above the catalog to open Android application details for its installed package.
 
 Start with [quickstart](docs/agents/quickstart.md), [API contracts](docs/agents/api.md),
 [migration](docs/agents/migration.md), [testing](docs/agents/testing.md) and [release maintenance](docs/releases.md).

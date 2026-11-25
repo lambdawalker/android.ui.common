@@ -34,4 +34,6 @@ media:
     - docs/assets/screenshots/verification-dark.png
     - docs/assets/screenshots/alternate-host.png
     - docs/assets/screenshots/components-light.png
+    - docs/assets/screenshots/focus-next-dark.png
+    - docs/assets/screenshots/focus-selected-dark.png
     require_dimensions: true
