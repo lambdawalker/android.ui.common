@@ -2,35 +2,38 @@
   "captures": [
     {
       "path": "docs/assets/screenshots/verification-light.png",
-      "image_sha256": "597749531e31637764865e2ce9daa0de18f44d40b7f4bf79610969ed032aad4e",
+      "image_sha256": "69316b3bbc38d5c3a4497374327145b9d0ddacc72da2e020bdcdd0d65211c0de",
       "width": 1032,
-      "height": 942,
-      "fixture": "EmptyVerificationScreenshot_empty-light_d5cc2666_0.png",
+      "height": 832,
+      "fixture": "DetailedVerificationScreenshot_detailed-light_68a39cc6_0.png",
       "status": "documentation illustration; not an accepted regression baseline"
     },
     {
       "path": "docs/assets/screenshots/verification-dark.png",
-      "image_sha256": "e91b11f709dd9a4999e1ee719feccdfbde674a0c8380f3c83f4b3f84db07aaa9",
+      "image_sha256": "feb996a68b6bce88c1b68ff3887e4add85d92c579fc3340e2c12249577cbe168",
       "width": 1032,
-      "height": 942,
-      "fixture": "CompleteVerificationScreenshot_complete-dark_c04af14b_0.png",
+      "height": 832,
+      "fixture": "DetailedVerificationScreenshot_detailed-dark_d30d5f2b_0.png",
       "status": "documentation illustration; not an accepted regression baseline"
     },
     {
       "path": "docs/assets/screenshots/alternate-host.png",
-      "image_sha256": "0a48aa369d7407e5cae37c2b6a7d75d0e248eb2801f419bdbbeb36ee0f4ec10b",
+      "image_sha256": "9d298f8e07a257807c5382536f23fc244373af4747642429233a0fd1b5ad14da",
       "width": 840,
-      "height": 1567,
+      "height": 1603,
       "fixture": "AlternateHostScreenshot_host-theme-narrow-large_6d9ef005_0.png",
       "status": "documentation illustration; not an accepted regression baseline"
     },
     {
       "path": "docs/assets/screenshots/components-light.png",
-      "image_sha256": "d4299ca7c81d8f58c1e1f22d32203f327a380a3e632ffd7ec4b8bb902e4d61f4",
+      "image_sha256": "12aa9df14ef0abe98a0ed63dc3e882e409994a88ab3d596c99227d3fc81c7495",
       "width": 1032,
       "height": 1502,
       "fixture": "ComponentsScreenshot_components-light_224a804e_0.png",
       "status": "documentation illustration; not an accepted regression baseline"
     }
-  ]
+  ],
+  "source_revision": "fc8e6e5c24b38def1e00b36bf6dcecbaf73d9b03",
+  "workflow_run": "https://github.com/lambdawalker/android.ui.common/actions/runs/45689505353",
+  "review": "Visually inspected documentation illustrations; full-suite regression baseline acceptance remains pending."
 }

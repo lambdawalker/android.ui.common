@@ -13,3 +13,13 @@ The host owns its theme, state, strings, navigation and network operations.
 - [Source reference](source-reference.md): generated declarations, not a complete semantic contract.
 
 JitPack release 0.1.0 is confirmed. Use the exact coordinates in [IMPORT.md](../../IMPORT.md); these current guides may also describe ongoing development.
+
+The detailed verification-card overload and recipient summary below are **Development source**,
+pending a new release. They inherit the host theme and do not infer verification success.
+
+| Light | Dark |
+| --- | --- |
+| ![Detailed verification card, light](../assets/screenshots/verification-light.png) | ![Detailed verification card, dark](../assets/screenshots/verification-dark.png) |
+
+Synthetic documentation illustrations; [capture provenance](../screenshots/documentation.json).
+These images are not accepted regression baselines.
