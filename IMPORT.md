@@ -7,7 +7,7 @@ Choose one publishing destination and one dependency syntax.
 
 ### jitpack
 
-Repository: **jitpack**. Confirmed version **0.1.1**. [Source commit](https://github.com/lambdawalker/android.ui.common/commit/84a2dc6586c63350d9d8867f6f7e6d3d9f0309e6).
+Repository: **jitpack**. Confirmed version **0.1.2**. [Source commit](https://github.com/lambdawalker/android.ui.common/commit/1f85ea3752e25bca9d0df6505d86fe4ef2f8c3d1).
 
 #### Gradle Kotlin DSL
 
@@ -27,7 +27,7 @@ In the app's `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("com.github.lambdawalker:android.ui.common:ui-common~v0.1.1-jitpack")
+    implementation("com.github.lambdawalker:android.ui.common:ui-common~v0.1.2-jitpack")
 }
 ```
 
@@ -49,7 +49,7 @@ In the app's `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'com.github.lambdawalker:android.ui.common:ui-common~v0.1.1-jitpack'
+    implementation 'com.github.lambdawalker:android.ui.common:ui-common~v0.1.2-jitpack'
 }
 ```
 
@@ -59,7 +59,7 @@ Use the dependency repositories shown above. Add to `gradle/libs.versions.toml`:
 
 ```toml
 [libraries]
-ui-common = { module = "com.github.lambdawalker:android.ui.common", version = "ui-common~v0.1.1-jitpack" }
+ui-common = { module = "com.github.lambdawalker:android.ui.common", version = "ui-common~v0.1.2-jitpack" }
 ```
 
 Then use this instead of the direct dependency in the app's `build.gradle.kts`:
@@ -93,7 +93,7 @@ Add these repositories and dependency to `pom.xml`:
   <dependency>
     <groupId>com.github.lambdawalker</groupId>
     <artifactId>android.ui.common</artifactId>
-    <version>ui-common~v0.1.1-jitpack</version>
+    <version>ui-common~v0.1.2-jitpack</version>
     <type>aar</type>
   </dependency>
 </dependencies>

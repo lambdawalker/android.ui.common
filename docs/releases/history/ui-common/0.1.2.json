@@ -1,0 +1,55 @@
+{
+  "destinations": {
+    "jitpack": {
+      "artifact": "android.ui.common",
+      "consumer_version": "ui-common~v0.1.2-jitpack",
+      "group": "com.github.lambdawalker",
+      "module": "ui-common",
+      "phase": "confirmed-public",
+      "release_identity": {
+        "fingerprint": "952804fd32ce01081a3b173f2cb7e5b611b91643f25fe85ffcc84c72caef3b65",
+        "module": "ui-common",
+        "schema": 1,
+        "source": "1f85ea3752e25bca9d0df6505d86fe4ef2f8c3d1",
+        "version": "0.1.2"
+      },
+      "repository": "jitpack",
+      "repository_url": "https://jitpack.io",
+      "sha256": {
+        "-javadoc.jar": "4034f65463a25fa052eba90bd49d6ec2f0d85b7829956760e2b2f5781bc921d2",
+        "-sources.jar": "e39de24e05204f3087f5701897f848ed4e493b931188805a27e293497c69d3c3",
+        ".aar": "bc67f217d3a0571c0c86745d50e7fc8c678ed2d560ac78a03e6cc304c797626b",
+        ".module": "8ec6664a1dd556612299b58fb3bc0231e5734ab1790f92f224b4a8f4aaeee0ea",
+        ".pom": "49998df11f654a846ac7b2dee9cbb46f93981549ce07e2a290591fdb1f54ee3e"
+      },
+      "source": "1f85ea3752e25bca9d0df6505d86fe4ef2f8c3d1",
+      "source_tag": "ui-common/v0.1.2-jitpack",
+      "upload_protocol": "guard-v1",
+      "verification": {
+        "asset_rules": {},
+        "asset_sha256": {},
+        "asset_sizes": {},
+        "assets": [],
+        "bytecode_major": 61,
+        "class_prefix": "com/apexfission/android/ui/common/",
+        "forbidden_asset_suffixes": [],
+        "required_api_artifacts": [
+          "foundation",
+          "ui",
+          "material3"
+        ],
+        "required_api_dependencies": [],
+        "required_assets": null
+      },
+      "verification_schema": 1,
+      "version": "0.1.2",
+      "workflow_attempt": "1",
+      "workflow_run": "45738836820"
+    }
+  },
+  "documentation_ref": "1f85ea3752e25bca9d0df6505d86fe4ef2f8c3d1",
+  "module": "ui-common",
+  "schema": 1,
+  "source": "1f85ea3752e25bca9d0df6505d86fe4ef2f8c3d1",
+  "version": "0.1.2"
+}
