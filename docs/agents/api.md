@@ -33,12 +33,19 @@ CodeVerificationCard disables its field/paste when busyMessage is non-null. Its 
 slots remain host-owned; explicitly disable those actions when required. Supporting/error messages
 are presentation, not server state. Nothing in this module persists credentials or starts network work.
 
-The Development card layout places instructions above the rounded code cells, the label/length
+The detailed card layout places instructions above the rounded code cells, the label/length
 legend below them, and explanation/recipient summary afterward. `VerificationCardDetails` selects
-the detailed overload; the original signature and trailing action lambda remain available. The
-new overload and recipient row are not in the confirmed 0.1.0 artifact. Use source integration
-until a new release is confirmed. Both overloads use host shapes/colors/typography; no brand palette
-is installed. Paste and caller action buttons appear below the recipient summary.
+the detailed overload; the original signature and trailing action lambda remain available. The detailed overload and recipient row are available in the confirmed 0.1.1 artifact. Both overloads use host shapes/colors/typography; no brand palette
+is installed.
+
+Development source adds a footer row below the recipient: Paste at the start and caller actions
+in a trailing column. Each side has bounded width so large text wraps without overlapping.
+A non-null `errorMessage` replaces the explanation with an outlined, tinted notice above the
+recipient, marks the logical editor's error semantics, and outlines/tints every digit cell.
+The focused cell retains its stronger primary border and caret. The host may replace
+`codeLengthLabel` with a localized error legend; the library does not infer a reason or attempt
+count. Clearing `errorMessage` restores the explanation and normal cells. These presentation
+changes require a release after 0.1.1; the published public signatures remain unchanged.
 
 The focused cell has a host-primary border and tinted fill, plus a caret at a collapsed cursor.
 Tapping a populated cell selects that digit for replacement; typing advances the selection to

@@ -22,13 +22,17 @@ Solo se lee el portapapeles al pulsar Pegar. El autocompletado es opcional y la 
 
 CodeVerificationCard deshabilita el campo y Pegar cuando busyMessage no es nulo. Las acciones composables siguen bajo control de la aplicación y deben deshabilitarse allí. Los mensajes son presentación; el módulo no guarda credenciales ni accede a la red.
 
-En Development, las instrucciones aparecen sobre las celdas redondeadas, la etiqueta y longitud
+Las instrucciones aparecen sobre las celdas redondeadas, la etiqueta y longitud
 debajo, y después la explicación y el resumen del destinatario. `VerificationCardDetails` selecciona
-la sobrecarga detallada; la firma original y su lambda final de acciones siguen disponibles. La nueva
-sobrecarga y la fila del destinatario no existen en el artefacto confirmado 0.1.0. Usa integración
-desde el código fuente hasta confirmar otra versión. Ambas sobrecargas heredan formas, colores y
-tipografía del host; no instalan una paleta de marca. Pegar y las acciones de la aplicación aparecen
-debajo del resumen del destinatario.
+la sobrecarga detallada; la firma original y su lambda final de acciones siguen disponibles. La sobrecarga detallada y la fila del destinatario están disponibles en el artefacto confirmado 0.1.1. Ambas sobrecargas heredan formas, colores y
+tipografía del host; no instalan una paleta de marca. En Development, el pie de la tarjeta coloca Pegar al inicio y las acciones de la aplicación en
+una columna al final de la misma fila. Cada lado tiene ancho limitado para ajustar el texto grande
+sin superposición. Un `errorMessage` no nulo sustituye la explicación por un aviso con borde y
+fondo de error antes del destinatario, añade semántica de error al editor y resalta todas las celdas.
+La celda enfocada conserva su borde primario más grueso y cursor. El host puede sustituir
+`codeLengthLabel` por una etiqueta de error localizada; la biblioteca no deduce la causa ni el
+número de intentos. Al borrar el error vuelven la explicación y las celdas normales. Estos cambios
+visuales necesitan una publicación posterior a 0.1.1; las firmas públicas no cambian.
 
 La celda enfocada muestra un borde primario y fondo coloreado, además de un cursor cuando no hay
 selección. Al tocar un dígito se selecciona para sustituirlo; al escribir, la selección avanza al

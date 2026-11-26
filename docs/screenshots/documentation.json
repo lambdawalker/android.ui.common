@@ -2,25 +2,25 @@
   "captures": [
     {
       "path": "docs/assets/screenshots/verification-light.png",
-      "image_sha256": "f5634a14b9b499e69e6781b168465f0d8af428d949fe73ab92e70f9b5f032005",
+      "image_sha256": "4f01e66e43b67b2d13194f41f8682f335a4c115b2227c47199db3ff48ab9bfe2",
       "width": 1032,
-      "height": 1126,
+      "height": 1000,
       "fixture": "DetailedVerificationScreenshot_detailed-light_68a39cc6_0.png",
       "status": "documentation illustration; not an accepted regression baseline"
     },
     {
       "path": "docs/assets/screenshots/verification-dark.png",
-      "image_sha256": "e1feef8d3899ac1a9eb7fcdc7e66901e31ba0c55c79e5656da4471c40d1147b4",
+      "image_sha256": "2d78526ee2b6cd58b113ece791583c01a5b3036553a50f6449e73a556fc79f30",
       "width": 1032,
-      "height": 1126,
+      "height": 1000,
       "fixture": "DetailedVerificationScreenshot_detailed-dark_d30d5f2b_0.png",
       "status": "documentation illustration; not an accepted regression baseline"
     },
     {
       "path": "docs/assets/screenshots/alternate-host.png",
-      "image_sha256": "4042774da7ac8905e83ec9069ad0361984b093725f4372df8302e4afa2226194",
+      "image_sha256": "33a190d18c7580c14d021469d4a44333bebba56f9d2b555bbb2fe806a72b25b4",
       "width": 840,
-      "height": 1582,
+      "height": 1604,
       "fixture": "AlternateHostScreenshot_host-theme-narrow-large_6d9ef005_0.png",
       "status": "documentation illustration; not an accepted regression baseline"
     },
@@ -47,9 +47,25 @@
       "image_sha256": "69da1799c75e7cba1665fe43ae938fdae7c4a99f13ebbb5007dfd9d361f9e3b6",
       "width": 1032,
       "height": 131
+    },
+    {
+      "path": "docs/assets/screenshots/error-dark.png",
+      "fixture": "DetailedErrorScreenshot_detailed-error-dark_c23dd31a_0.png",
+      "status": "documentation illustration; not an accepted regression baseline",
+      "image_sha256": "b28123d7e4a13b1ad4d802945881d73373fed71408e9662305ae0c5c5b958385",
+      "width": 1032,
+      "height": 1044
+    },
+    {
+      "path": "docs/assets/screenshots/focus-error-dark.png",
+      "fixture": "ErrorFocusScreenshot_focus-error-dark_0c278e95_0.png",
+      "status": "documentation illustration; not an accepted regression baseline",
+      "image_sha256": "fcfa9671e48a6529feacae7a61bf82c9aefbe5579f3179233c5e358ed6612a41",
+      "width": 1032,
+      "height": 131
     }
   ],
-  "source_revision": "66e66710e9e3337615a39ecbfb6269c30ebe5377",
-  "workflow_run": "https://github.com/lambdawalker/android.ui.common/actions/runs/45695060805",
-  "review": "Documentation illustrations reviewed for restored actions, cursor and selection indication, host-theme inheritance and narrow/large-text layout. Full-suite regression baseline acceptance remains pending."
+  "source_revision": "7811d99519b4a2354eb049024298ee71aeb12b15",
+  "workflow_run": "https://github.com/lambdawalker/android.ui.common/actions/runs/45727313832",
+  "review": "Reviewed the shared action row, outlined error notice before the recipient, all-cell error styling, retained primary focus, and narrow/large-text wrapping. Documentation illustrations only; full-suite regression baselines remain unaccepted."
 }
