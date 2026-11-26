@@ -32,3 +32,10 @@ visuales aprobadas ni evidencia del autocompletado en dispositivos.
 
 Estas ilustraciones usan el mismo renderizador de celdas que el campo lógico. Las pruebas en
 dispositivo ejecutan toques y escritura reales; las ilustraciones no sustituyen esas pruebas.
+
+## Presentación de errores
+
+![Aviso de error con borde y acciones en una fila](../assets/screenshots/error-dark.png)
+![Enfoque primario conservado entre las celdas con error](../assets/screenshots/focus-error-dark.png)
+
+El host proporciona la causa del error y lo borra cuando corresponde. No se deduce el número de intentos.

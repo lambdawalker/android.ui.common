@@ -36,4 +36,6 @@ media:
     - docs/assets/screenshots/components-light.png
     - docs/assets/screenshots/focus-next-dark.png
     - docs/assets/screenshots/focus-selected-dark.png
+    - docs/assets/screenshots/error-dark.png
+    - docs/assets/screenshots/focus-error-dark.png
     require_dimensions: true

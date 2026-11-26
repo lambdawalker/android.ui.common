@@ -41,3 +41,10 @@ not approved regression baselines or evidence of device autofill behavior.
 
 These focused-state illustrations use the same cell renderer as the logical input. Device tests
 separately exercise real taps and typing; the illustrations do not substitute for interaction tests.
+
+## Error presentation
+
+![Outlined error notice and one-row actions](../assets/screenshots/error-dark.png)
+![Primary focus retained among error cells](../assets/screenshots/focus-error-dark.png)
+
+The host supplies the error reason and clears it when appropriate. No attempt count is inferred.
