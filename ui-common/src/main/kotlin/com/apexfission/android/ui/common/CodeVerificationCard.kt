@@ -63,6 +63,7 @@ public fun CodeVerificationCard(
  * [VerificationCardDetails.codeLengthLabel] to a localized error legend while an error is present.
  * Paste sits at the start of the footer; caller actions occupy its trailing column.
  */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 public fun CodeVerificationCard(
     details: VerificationCardDetails,
@@ -95,9 +96,9 @@ public fun CodeVerificationCard(
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 CodeInput(editor, onValueChange, codeContentDescription, codeLength, inputEnabled, autoFocus, autofillContentType,
                     errorMessage = errorMessage)
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalAlignment = Alignment.Top) {
-                    Text(codeLabel, Modifier.weight(1f), style = MaterialTheme.typography.labelLarge)
+                FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text(codeLabel, Modifier.padding(end = 12.dp), style = MaterialTheme.typography.labelLarge)
                     details.codeLengthLabel?.let {
                         Text(it, style = MaterialTheme.typography.bodySmall,
                             color = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant)

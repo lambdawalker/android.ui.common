@@ -137,6 +137,7 @@ public fun CodeVerificationCard(
     supportingContent: (@Composable ColumnScope.() -> Unit)? = null,
     actions: (@Composable ColumnScope.() -> Unit)? = null,
 )
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 public fun CodeVerificationCard(
     details: VerificationCardDetails,
