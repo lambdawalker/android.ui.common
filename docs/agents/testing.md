@@ -19,7 +19,8 @@ initial rendered output is a candidate, not an accepted baseline. See [screensho
 for rendering and intentional acceptance. Do not refresh baselines merely to silence a difference.
 Unit tests cover normalization; Compose tests cover callbacks, semantics, input and explicit paste.
 The sample device tests check the top App settings intent, return and recreation. The detailed card
-tests check one logical input, host-owned recipient status and actions below the recipient. Input
+tests check one logical input, host-owned recipient status and a shared action row below the recipient.
+They also check narrow/large-text actions, error semantics and notice order, and focus during error recovery. Input
 tests tap individual cells, replace digits, delete and paste. They inspect selection semantics and
 rendered border pixels to verify that the visible highlight follows the actual editing position.
 Host screenshots do not prove system autofill, IME or physical-device behavior.

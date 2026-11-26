@@ -24,6 +24,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.KeyboardType
@@ -80,6 +81,7 @@ internal fun CodeInput(
     enabled: Boolean,
     autoFocus: Boolean,
     autofillContentType: ContentType?,
+    errorMessage: String? = null,
 ) {
     require(codeLength > 0) { "codeLength must be positive" }
     var focused by remember { mutableStateOf(false) }
@@ -106,10 +108,14 @@ internal fun CodeInput(
         modifier = Modifier.fillMaxWidth().heightIn(min = 50.dp).focusRequester(editor.focusRequester)
             .onFocusChanged { focused = it.isFocused }
             .then(if (autofillContentType != null) Modifier.contentType(autofillContentType) else Modifier)
-            .semantics { this.contentDescription = contentDescription },
+            .semantics {
+                this.contentDescription = contentDescription
+                if (errorMessage != null) error(errorMessage)
+            },
         decorationBox = { innerTextField ->
             Box(Modifier.fillMaxWidth()) {
-                CodeInputCells(editor.fieldValue.text, editor.fieldValue.selection, codeLength, focused && enabled)
+                CodeInputCells(editor.fieldValue.text, editor.fieldValue.selection, codeLength, focused && enabled,
+                    isError = errorMessage != null)
                 // One real editor supplies keyboard, accessibility and autofill. Cells paint its selection.
                 Box(Modifier.matchParentSize().drawWithContent {}) { innerTextField() }
                 // Map touches to the cell layout, rather than the invisible editor's glyph positions.
@@ -134,18 +140,26 @@ internal fun CodeInput(
 }
 
 @Composable
-internal fun CodeInputCells(value: String, selection: TextRange, codeLength: Int, focused: Boolean) {
+internal fun CodeInputCells(value: String, selection: TextRange, codeLength: Int, focused: Boolean, isError: Boolean = false) {
     val activeIndex = selection.min.coerceIn(0, codeLength - 1)
     Row(Modifier.fillMaxWidth().clearAndSetSemantics {}, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         repeat(codeLength) { index ->
             val active = focused && index == activeIndex
             Surface(modifier = Modifier.weight(1f).heightIn(min = 50.dp),
-                color = if (active) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceContainer,
-                border = if (active) BorderStroke(2.dp, MaterialTheme.colorScheme.primary) else null,
+                color = when {
+                    isError -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.35f)
+                    active -> MaterialTheme.colorScheme.primaryContainer
+                    else -> MaterialTheme.colorScheme.surfaceContainer
+                },
+                border = when {
+                    active -> BorderStroke(2.dp, MaterialTheme.colorScheme.primary)
+                    isError -> BorderStroke(1.dp, MaterialTheme.colorScheme.error.copy(alpha = 0.5f))
+                    else -> null
+                },
                 shape = MaterialTheme.shapes.small) {
                 Box(Modifier.padding(vertical = 8.dp), contentAlignment = Alignment.Center) {
                     Text(value.getOrNull(index)?.toString() ?: "",
-                        color = if (active) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface,
+                        color = if (active && !isError) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface,
                         style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
                     if (active && selection.collapsed) Box(
                         Modifier.align(if (index < selection.start) Alignment.CenterEnd else if (index < value.length) Alignment.CenterStart else Alignment.Center)

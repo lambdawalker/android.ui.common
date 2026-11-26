@@ -1,5 +1,11 @@
 package com.apexfission.android.ui.common
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.width
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.dp
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -188,9 +194,67 @@ class ComponentsTest {
         val change = compose.onNodeWithText("Change destination")
         assertTrue(paste.fetchSemanticsNode().boundsInRoot.top > recipient.bottom)
         assertTrue(change.fetchSemanticsNode().boundsInRoot.top > recipient.bottom)
+        val pasteBounds = paste.fetchSemanticsNode().boundsInRoot
+        val changeBounds = change.fetchSemanticsNode().boundsInRoot
+        assertTrue("Actions share one row", kotlin.math.abs(pasteBounds.center.y - changeBounds.center.y) < 1f)
+        assertTrue("Paste precedes the trailing action without overlap", pasteBounds.right < changeBounds.left)
         compose.runOnIdle { assertEquals("", code) }
         paste.performClick()
         compose.runOnIdle { assertEquals("123456", code) }
+        compose.onNodeWithContentDescription("Code").assertIsFocused()
+        change.performClick()
+        compose.runOnIdle { assertEquals(1, changes) }
+    }
+
+    @Test fun errorNoticePrecedesRecipientAndEditingClearsTheErrorWithoutLosingFocus() {
+        var code by mutableStateOf("123456")
+        var message by mutableStateOf<String?>("Check the code and try again.")
+        val primary = Color(0xFF2368BC)
+        compose.setContent { MaterialTheme(colorScheme = lightColorScheme(primary = primary)) {
+            CodeVerificationCard(
+                details = VerificationCardDetails(if (message != null) "Incorrect code" else "6 digits", "Confirm access to continue."),
+                value = code, onValueChange = { code = it; message = null }, codeLabel = "Confirmation code",
+                codeContentDescription = "Code", pasteLabel = "Paste code", recipient = "name@example.invalid",
+                errorMessage = message,
+            )
+        } }
+        val field = compose.onNodeWithContentDescription("Code")
+        compose.onAllNodes(hasSetTextAction()).assertCountEquals(1)
+        field.assert(SemanticsMatcher.expectValue(SemanticsProperties.Error, "Check the code and try again."))
+        compose.onNodeWithText("Incorrect code").assertIsDisplayed()
+        compose.onNodeWithText("Confirm access to continue.").assertDoesNotExist()
+        val legend = compose.onNodeWithText("Confirmation code").fetchSemanticsNode().boundsInRoot
+        val notice = compose.onNodeWithText("Check the code and try again.").fetchSemanticsNode().boundsInRoot
+        val recipient = compose.onNodeWithText("name@example.invalid").fetchSemanticsNode().boundsInRoot
+        assertTrue("Error follows the code legend", notice.top > legend.bottom)
+        assertTrue("Error precedes the recipient", notice.bottom < recipient.top)
+        field.performTouchInput { click(Offset(width * 2.5f / 6, height / 2f)) }
+        assertActiveCell(field, 2, primary)
+        field.performTextInput("9")
+        compose.runOnIdle { assertEquals("129456", code) }
+        field.assertIsFocused().assert(SemanticsMatcher.keyNotDefined(SemanticsProperties.Error))
+        assertActiveCell(field, 3, primary)
+        compose.onNodeWithText("Incorrect code").assertDoesNotExist()
+        compose.onNodeWithText("Check the code and try again.").assertDoesNotExist()
+        compose.onNodeWithText("6 digits").assertIsDisplayed()
+        compose.onNodeWithText("Confirm access to continue.").assertIsDisplayed()
+    }
+
+    @Test fun footerActionsRemainSeparateAndClickableAtLargeFontOnNarrowHost() {
+        var changes = 0
+        compose.setContent {
+            val density = LocalDensity.current
+            CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale = 1.6f)) {
+                MaterialTheme { Box(Modifier.width(320.dp)) {
+                    CodeVerificationCard("", {}, "Confirmation code", "Code", "Paste code",
+                        actions = { TextButton({ changes++ }) { Text("Change destination") } })
+                } }
+            }
+        }
+        val paste = compose.onNodeWithText("Paste code").assertIsDisplayed()
+        val change = compose.onNodeWithText("Change destination").assertIsDisplayed()
+        assertTrue(paste.fetchSemanticsNode().boundsInRoot.right < change.fetchSemanticsNode().boundsInRoot.left)
+        paste.performClick()
         compose.onNodeWithContentDescription("Code").assertIsFocused()
         change.performClick()
         compose.runOnIdle { assertEquals(1, changes) }

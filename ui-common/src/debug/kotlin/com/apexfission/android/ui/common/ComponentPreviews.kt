@@ -34,12 +34,13 @@ internal fun VerificationFixture(code: String = "", error: Boolean = false, busy
 }
 
 @Composable
-internal fun DetailedVerificationFixture() {
+internal fun DetailedVerificationFixture(error: Boolean = false) {
     CodeVerificationCard(
-        details = VerificationCardDetails("6 digits", "Confirm access to this email address to continue.", "Awaiting confirmation"),
-        value = "", onValueChange = {}, codeLabel = "Confirmation code", codeContentDescription = "Six digit code",
+        details = VerificationCardDetails(if (error) "Incorrect code" else "6 digits", "Confirm access to this email address to continue.", "Awaiting confirmation"),
+        value = if (error) "482019" else "", onValueChange = {}, codeLabel = "Confirmation code", codeContentDescription = "Six digit code",
         pasteLabel = "Paste code", instructions = "Enter the 6-digit code sent to your email to continue.",
         recipient = "alex.turner@example.invalid",
+        errorMessage = if (error) "That code didn’t match. Check the six-digit code in your email and try again." else null,
         actions = { TextButton({}) { Text("Change destination") } },
     )
 }

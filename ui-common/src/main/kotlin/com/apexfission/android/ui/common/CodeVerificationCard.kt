@@ -1,12 +1,14 @@
 // Extracted and adapted from android.apexfission.auth; owner licensed Apache-2.0.
 package com.apexfission.android.ui.common
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.ContentType
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
@@ -57,6 +59,9 @@ public fun CodeVerificationCard(
  * Verification card with a code legend, explanation and recipient summary.
  * The original overload is retained, including its trailing [actions] lambda.
  * Icons are decorative slots; [details] supplies the accessible status text.
+ * Errors replace the explanation with an outlined notice above the recipient. Hosts may set
+ * [VerificationCardDetails.codeLengthLabel] to a localized error legend while an error is present.
+ * Paste sits at the start of the footer; caller actions occupy its trailing column.
  */
 @Composable
 public fun CodeVerificationCard(
@@ -88,17 +93,19 @@ public fun CodeVerificationCard(
             if (!instructions.isNullOrBlank()) Text(instructions, style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant)
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                CodeInput(editor, onValueChange, codeContentDescription, codeLength, inputEnabled, autoFocus, autofillContentType)
+                CodeInput(editor, onValueChange, codeContentDescription, codeLength, inputEnabled, autoFocus, autofillContentType,
+                    errorMessage = errorMessage)
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalAlignment = Alignment.Top) {
                     Text(codeLabel, Modifier.weight(1f), style = MaterialTheme.typography.labelLarge)
                     details.codeLengthLabel?.let {
                         Text(it, style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            color = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
             }
-            details.explanation?.let { Text(it, style = MaterialTheme.typography.bodyLarge,
+            if (errorMessage != null) VerificationErrorNotice(errorMessage)
+            else details.explanation?.let { Text(it, style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant) }
             if (!recipient.isNullOrBlank()) VerificationRecipientRow(
                 recipient, details.recipientStatus, leadingIcon = recipientLeadingIcon,
@@ -107,14 +114,30 @@ public fun CodeVerificationCard(
             if (busyMessage != null) Text(busyMessage, style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
-            if (errorMessage != null) Text(errorMessage, color = MaterialTheme.colorScheme.error,
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
             supportingContent?.invoke(this)
-            if (pasteLabel != null || actions != null) Column(Modifier.fillMaxWidth()) {
-                if (pasteLabel != null) CodePasteButton(editor, onValueChange, pasteLabel, codeLength, inputEnabled)
-                actions?.invoke(this)
+            if (pasteLabel != null || actions != null) Row(Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                if (pasteLabel != null) Box(Modifier.weight(1f), contentAlignment = Alignment.CenterStart) {
+                    CodePasteButton(editor, onValueChange, pasteLabel, codeLength, inputEnabled)
+                }
+                if (actions != null) Column(Modifier.weight(1f), horizontalAlignment = Alignment.End, content = actions)
             }
+        }
+    }
+}
+
+@Composable
+private fun VerificationErrorNotice(message: String) {
+    Surface(Modifier.fillMaxWidth().semantics { liveRegion = LiveRegionMode.Polite },
+        shape = MaterialTheme.shapes.small,
+        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.35f),
+        contentColor = MaterialTheme.colorScheme.onSurface,
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.error.copy(alpha = 0.5f))) {
+        Row(Modifier.padding(12.dp), horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.Top) {
+            Icon(painterResource(R.drawable.ui_common_error), contentDescription = null,
+                tint = MaterialTheme.colorScheme.error, modifier = Modifier.size(20.dp))
+            Text(message, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
         }
     }
 }

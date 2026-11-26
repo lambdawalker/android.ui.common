@@ -93,3 +93,17 @@ fun SelectedDigitFocusScreenshot() { PreviewHost { CodeInputCells("123456", Text
 @Preview(name = "focus-end-dark", widthDp = 393, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun CompleteCodeFocusScreenshot() { PreviewHost { CodeInputCells("123456", TextRange(6), 6, true) } }
+
+@PreviewTest
+@Preview(name = "detailed-error-light", widthDp = 393)
+@Preview(name = "detailed-error-dark", widthDp = 393, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "detailed-error-narrow-large", widthDp = 320, fontScale = 1.6f)
+@Preview(name = "detailed-error-narrow-large-dark", widthDp = 320, fontScale = 1.6f, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun DetailedErrorScreenshot() { PreviewHost { DetailedVerificationFixture(error = true) } }
+
+@PreviewTest
+@Preview(name = "focus-error-light", widthDp = 393)
+@Preview(name = "focus-error-dark", widthDp = 393, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun ErrorFocusScreenshot() { PreviewHost { CodeInputCells("482019", TextRange(2, 3), 6, true, isError = true) } }
