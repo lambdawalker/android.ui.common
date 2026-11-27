@@ -4,12 +4,10 @@ import android.app.Activity
 import android.app.Instrumentation.ActivityResult
 import android.net.Uri
 import android.provider.Settings
-import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithContentDescription
-import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performScrollTo
+import androidx.test.espresso.Espresso.closeSoftKeyboard
+import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasData
@@ -36,7 +34,7 @@ class SampleSettingsTest {
         } finally { Intents.release() }
     }
 
-    @Test fun settingsReturnAndRecreationKeepTheCodeDemoUsable() {
+    @Test fun settingsReturnAndRecreationKeepTheDemoListUsable() {
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
         val packageName = compose.activity.packageName
         compose.onNodeWithText(compose.activity.getString(R.string.app_settings)).performClick()
@@ -45,6 +43,62 @@ class SampleSettingsTest {
         assertTrue(device.wait(Until.hasObject(By.pkg(packageName).depth(0)), 10_000))
         compose.activityRule.scenario.recreate()
         compose.onNodeWithText(compose.activity.getString(R.string.app_settings)).assertIsDisplayed()
+        openDemo(ComponentDemo.Verification)
         compose.onNodeWithContentDescription(compose.activity.getString(R.string.code_description)).performScrollTo().assertIsDisplayed()
     }
+
+    @Test fun everyDemoOpensAndReturnsToTheList() {
+        for (demo in ComponentDemo.entries) {
+            openDemo(demo)
+            scrollTo(hasText(compose.activity.getString(R.string.back_to_demos)))
+            compose.onNodeWithText(compose.activity.getString(R.string.back_to_demos)).assertIsDisplayed()
+            when (demo) {
+                ComponentDemo.Verification, ComponentDemo.CodeInput ->
+                    compose.onNodeWithContentDescription(compose.activity.getString(R.string.code_description)).performScrollTo().assertIsDisplayed()
+                ComponentDemo.Action -> {
+                    compose.onNodeWithText(compose.activity.getString(R.string.open)).performScrollTo().performClick()
+                    compose.onNodeWithText(compose.activity.getString(R.string.clicked)).assertIsDisplayed()
+                }
+                ComponentDemo.Content -> compose.onNodeWithText(compose.activity.getString(R.string.content_title)).performScrollTo().assertIsDisplayed()
+                ComponentDemo.Recipient -> compose.onNodeWithText("name@example.invalid").performScrollTo().assertIsDisplayed()
+                ComponentDemo.EmptyState -> compose.onNodeWithText(compose.activity.getString(R.string.empty_title)).performScrollTo().assertIsDisplayed()
+            }
+            scrollTo(hasText(compose.activity.getString(R.string.back_to_demos)))
+            compose.onNodeWithText(compose.activity.getString(R.string.back_to_demos)).performClick()
+            compose.onNodeWithText(compose.activity.getString(R.string.back_to_demos)).assertDoesNotExist()
+            // The list retains its position, including the final item below the initial viewport.
+            compose.onNodeWithText(compose.activity.getString(demo.title)).assertIsDisplayed()
+        }
+    }
+
+    @Test fun recreationKeepsTheSelectedDemoAndSystemBackStartsTheNextVisitFresh() {
+        openDemo(ComponentDemo.Verification)
+        val field = compose.onNodeWithContentDescription(compose.activity.getString(R.string.code_description))
+        field.performScrollTo().performTextInput("12")
+        closeSoftKeyboard()
+        scrollTo(hasText(compose.activity.getString(R.string.next_state)))
+        compose.onNodeWithText(compose.activity.getString(R.string.next_state)).performClick()
+        compose.activityRule.scenario.recreate()
+        scrollTo(hasContentDescription(compose.activity.getString(R.string.code_description)))
+        field.assertTextEquals("12")
+        compose.onNodeWithText(compose.activity.getString(R.string.error)).performScrollTo().assertIsDisplayed()
+        field.performScrollTo().performTextInput("3")
+        compose.onNodeWithText(compose.activity.getString(R.string.error)).assertDoesNotExist()
+        closeSoftKeyboard()
+        pressBack()
+        compose.onNodeWithText(compose.activity.getString(R.string.back_to_demos)).assertDoesNotExist()
+        openDemo(ComponentDemo.Verification)
+        field.performScrollTo().assertTextEquals("")
+    }
+
+    private fun openDemo(demo: ComponentDemo) {
+        val title = compose.activity.getString(demo.title)
+        scrollTo(hasText(title))
+        compose.onNodeWithText(title).performClick()
+    }
+
+    private fun scrollTo(matcher: SemanticsMatcher) {
+        compose.onNode(hasScrollToIndexAction()).performScrollToNode(matcher)
+    }
+
 }

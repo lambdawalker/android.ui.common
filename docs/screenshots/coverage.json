@@ -59,5 +59,15 @@
     "outlined error notice, all error cells, and active focus during an error"
   ],
   "interaction_suite": "ui-common/src/androidTest/kotlin/com/apexfission/android/ui/common/ComponentsTest.kt",
-  "note": "Fixture inventory is not evidence of executed device tests or approved screenshot baselines."
+  "note": "Fixture inventory is not evidence of executed device tests or approved screenshot baselines.",
+  "sample_screens": [
+    "SampleScreenshots",
+    "VerificationDemoScreenshots",
+    "CodeInputDemoScreenshots",
+    "ActionDemoScreenshots",
+    "ContentDemoScreenshots",
+    "RecipientDemoScreenshots",
+    "EmptyStateDemoScreenshots"
+  ],
+  "sample_interaction_suite": "app/src/androidTest/kotlin/com/apexfission/android/ui/common/sample/SampleSettingsTest.kt"
 }

@@ -4,7 +4,7 @@
     <string name="explanation">Confirma el acceso a esta dirección de correo para continuar.</string>
     <string name="recipient_status">Destinatario de ejemplo</string>
     <string name="app_name">UI Common</string>
-    <string name="catalog_description">Componentes reutilizables con el tema de tu aplicación.</string>
+    <string name="catalog_description">Elige una demostración. Cada ejemplo funciona sin conexión y usa el tema de tu aplicación.</string>
     <string name="verification">Verificación de código</string>
     <string name="instructions">Introduce el código de tu mensaje más reciente.</string>
     <string name="code_label">Código de confirmación</string>
@@ -28,4 +28,13 @@
     <string name="mode_error">Error</string>
     <string name="mode_busy">Ocupado</string>
     <string name="mode_disabled">Deshabilitado</string>
+    <string name="back_to_demos">Volver a las demostraciones</string>
+    <string name="verification_demo_description">Prueba la escritura, el pegado y los estados de error, ocupado y deshabilitado. Verificar muestra un error de ejemplo; no se envía correo.</string>
+    <string name="code_input_demo">Entrada de código</string>
+    <string name="code_input_demo_description">Prueba el campo de seis dígitos, toca un dígito para editarlo o pega un código.</string>
+    <string name="content_demo">Contenido y encabezados</string>
+    <string name="recipient_demo">Resumen del destinatario</string>
+    <string name="recipient_demo_description">Destino y estado proporcionados por la aplicación, con ajuste de línea.</string>
+    <string name="empty_demo">Estado vacío</string>
+    <string name="incorrect_code">Código incorrecto</string>
 </resources>
