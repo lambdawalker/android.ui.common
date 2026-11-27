@@ -4,9 +4,9 @@
     <string name="explanation">Confirm access to this email address to continue.</string>
     <string name="recipient_status">Sample recipient</string>
     <string name="app_name">UI Common</string>
-    <string name="catalog_description">Choose a component demo. Each example runs offline with your app’s theme.</string>
+    <string name="catalog_description">Choose an offline component demo.</string>
     <string name="verification">Code verification</string>
-    <string name="instructions">Enter the code from your latest message.</string>
+    <string name="instructions">Enter any six digits. Verify shows a sample error.</string>
     <string name="code_label">Confirmation code</string>
     <string name="code_description">Six-digit confirmation code</string>
     <string name="paste">Paste code</string>
@@ -29,9 +29,9 @@
     <string name="mode_busy">Busy</string>
     <string name="mode_disabled">Disabled</string>
     <string name="back_to_demos">Back to demos</string>
-    <string name="verification_demo_description">Try typing, pasting and the error, busy and disabled states. Verify shows a sample error; no email is sent.</string>
+    <string name="verification_demo_description">Code entry with ready, error, busy and disabled states.</string>
     <string name="code_input_demo">Code input</string>
-    <string name="code_input_demo_description">Try the standalone six-digit field, tap a digit to edit it, or paste a code.</string>
+    <string name="code_input_demo_description">Type, paste and edit a six-digit code.</string>
     <string name="content_demo">Content and headings</string>
     <string name="recipient_demo">Recipient summary</string>
     <string name="recipient_demo_description">A wrapping destination and status supplied by the host.</string>
