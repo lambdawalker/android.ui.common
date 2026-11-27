@@ -50,8 +50,8 @@ class SampleSettingsTest {
     @Test fun everyDemoOpensAndReturnsToTheList() {
         for (demo in ComponentDemo.entries) {
             openDemo(demo)
-            scrollTo(hasText(compose.activity.getString(R.string.back_to_demos)))
-            compose.onNodeWithText(compose.activity.getString(R.string.back_to_demos)).assertIsDisplayed()
+            compose.onNodeWithContentDescription(compose.activity.getString(R.string.back_to_demos)).assertIsDisplayed()
+            compose.onNodeWithText(compose.activity.getString(R.string.app_settings)).assertDoesNotExist()
             when (demo) {
                 ComponentDemo.Verification, ComponentDemo.CodeInput ->
                     compose.onNodeWithContentDescription(compose.activity.getString(R.string.code_description)).performScrollTo().assertIsDisplayed()
@@ -63,10 +63,9 @@ class SampleSettingsTest {
                 ComponentDemo.Recipient -> compose.onNodeWithText("name@example.invalid").performScrollTo().assertIsDisplayed()
                 ComponentDemo.EmptyState -> compose.onNodeWithText(compose.activity.getString(R.string.empty_title)).performScrollTo().assertIsDisplayed()
             }
-            scrollTo(hasText(compose.activity.getString(R.string.back_to_demos)))
-            compose.onNodeWithText(compose.activity.getString(R.string.back_to_demos)).performClick()
-            compose.onNodeWithText(compose.activity.getString(R.string.back_to_demos)).assertDoesNotExist()
-            compose.onNodeWithText(compose.activity.getString(R.string.back_to_components)).performClick()
+            compose.onNodeWithContentDescription(compose.activity.getString(R.string.back_to_demos)).performClick()
+            compose.onNodeWithContentDescription(compose.activity.getString(R.string.back_to_demos)).assertDoesNotExist()
+            compose.onNodeWithContentDescription(compose.activity.getString(R.string.back_to_components)).performClick()
             // The list retains its position, including the final item below the initial viewport.
             compose.onNodeWithText(compose.activity.getString(demo.title)).assertIsDisplayed()
         }
@@ -77,7 +76,6 @@ class SampleSettingsTest {
         val field = compose.onNodeWithContentDescription(compose.activity.getString(R.string.code_description))
         field.performScrollTo().performTextInput("12")
         closeSoftKeyboard()
-        scrollTo(hasText(compose.activity.getString(R.string.next_state)))
         compose.onNodeWithText(compose.activity.getString(R.string.next_state)).performClick()
         compose.activityRule.scenario.recreate()
         scrollTo(hasContentDescription(compose.activity.getString(R.string.code_description)))
@@ -87,7 +85,7 @@ class SampleSettingsTest {
         compose.onNodeWithText(compose.activity.getString(R.string.error)).assertDoesNotExist()
         closeSoftKeyboard()
         pressBack()
-        compose.onNodeWithText(compose.activity.getString(R.string.back_to_demos)).assertDoesNotExist()
+        compose.onNodeWithContentDescription(compose.activity.getString(R.string.back_to_demos)).assertDoesNotExist()
         compose.onNodeWithText(compose.activity.getString(R.string.open)).performClick()
         field.performScrollTo().assertTextEquals("")
     }
@@ -97,7 +95,7 @@ class SampleSettingsTest {
         scrollTo(hasText(title))
         compose.onNodeWithText(title).performClick()
         compose.activityRule.scenario.recreate()
-        compose.onNodeWithText(compose.activity.getString(R.string.back_to_components)).assertIsDisplayed()
+        compose.onNodeWithContentDescription(compose.activity.getString(R.string.back_to_components)).assertIsDisplayed()
         compose.onNodeWithText(compose.activity.getString(R.string.open)).performClick()
     }
 

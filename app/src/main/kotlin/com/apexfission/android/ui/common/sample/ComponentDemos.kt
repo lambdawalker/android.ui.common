@@ -5,6 +5,8 @@ import androidx.activity.compose.BackHandler
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -75,9 +77,8 @@ internal fun ComponentCatalog(onOpenDemo: (ComponentDemo) -> Unit = {}, onOpenSe
 @Composable
 internal fun ComponentDemoList(component: ComponentDemo, onOpenDemo: () -> Unit = {},
     onBack: () -> Unit = {}, onOpenSettings: () -> Unit = {}) {
-    CatalogScreen(title = stringResource(component.title),
-        description = stringResource(R.string.component_demos),
-        headerActions = { DemoHeaderActions(onOpenSettings, onBack, R.string.back_to_components) }) {
+    DemoSectionScreen(title = stringResource(component.title), onBack = onBack,
+        backLabel = R.string.back_to_components) {
         item {
             ActionCard(stringResource(R.string.interactive_demo), stringResource(component.description),
                 stringResource(R.string.open), onOpenDemo)
@@ -99,6 +100,28 @@ private fun DemoHeaderActions(onOpenSettings: () -> Unit, onBack: (() -> Unit)? 
     }
 }
 
+/** Sample-only navigation chrome; content scrolls independently of the fixed controls. */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun DemoSectionScreen(title: String, onBack: () -> Unit,
+    @StringRes backLabel: Int = R.string.back_to_demos,
+    bottomBar: @Composable () -> Unit = {}, content: LazyListScope.() -> Unit) {
+    Scaffold(
+        topBar = {
+            TopAppBar(title = { Text(title) }, navigationIcon = {
+                IconButton(onClick = onBack) {
+                    Icon(painterResource(R.drawable.demo_back), contentDescription = stringResource(backLabel))
+                }
+            })
+        },
+        bottomBar = bottomBar,
+    ) { insets ->
+        LazyColumn(Modifier.fillMaxSize().padding(insets).consumeWindowInsets(insets).imePadding(),
+            contentPadding = PaddingValues(24.dp), verticalArrangement = Arrangement.spacedBy(24.dp),
+            content = content)
+    }
+}
+
 /** Each screen is an offline, caller-owned example with a fresh state when reopened. */
 @Composable
 internal fun ComponentDemoScreen(demo: ComponentDemo, onBack: () -> Unit = {}, onOpenSettings: () -> Unit = {}) {
@@ -106,10 +129,18 @@ internal fun ComponentDemoScreen(demo: ComponentDemo, onBack: () -> Unit = {}, o
     var mode by rememberSaveable { mutableIntStateOf(0) }
     var clicked by rememberSaveable { mutableStateOf(false) }
     val modeLabel = stringResource(listOf(R.string.mode_normal, R.string.mode_error, R.string.mode_busy, R.string.mode_disabled)[mode])
-    CatalogScreen(title = stringResource(demo.title), description = stringResource(demo.description),
-        headerActions = { DemoHeaderActions(onOpenSettings, onBack) },
-        showEmptyState = demo == ComponentDemo.EmptyState,
-        emptyState = { EmptyStateCard(stringResource(R.string.empty_title), stringResource(R.string.empty_body)) }) {
+    DemoSectionScreen(title = stringResource(demo.title), onBack = onBack,
+        bottomBar = {
+            if (demo == ComponentDemo.Verification) Surface(tonalElevation = 3.dp) {
+                Row(Modifier.fillMaxWidth().navigationBarsPadding().padding(horizontal = 24.dp, vertical = 12.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                    Text(modeLabel, modifier = Modifier.weight(1f), style = MaterialTheme.typography.labelLarge)
+                    OutlinedButton(onClick = { mode = (mode + 1) % 4 }, shape = MaterialTheme.shapes.small) {
+                        Text(stringResource(R.string.next_state))
+                    }
+                }
+            }
+        }) {
         when (demo) {
             ComponentDemo.Verification -> {
                 item {
@@ -133,12 +164,6 @@ internal fun ComponentDemoScreen(demo: ComponentDemo, onBack: () -> Unit = {}, o
                         },
                     )
                 }
-                item {
-                    Text(stringResource(R.string.state_label, modeLabel))
-                    OutlinedButton(onClick = { mode = (mode + 1) % 4 }, shape = MaterialTheme.shapes.small) {
-                        Text(stringResource(R.string.next_state))
-                    }
-                }
             }
             ComponentDemo.CodeInput -> item {
                 ContentCard {
@@ -161,7 +186,9 @@ internal fun ComponentDemoScreen(demo: ComponentDemo, onBack: () -> Unit = {}, o
             ComponentDemo.Recipient -> item {
                 VerificationRecipientRow("name@example.invalid", stringResource(R.string.recipient_status))
             }
-            ComponentDemo.EmptyState -> Unit
+            ComponentDemo.EmptyState -> item {
+                EmptyStateCard(stringResource(R.string.empty_title), stringResource(R.string.empty_body))
+            }
         }
     }
 }
