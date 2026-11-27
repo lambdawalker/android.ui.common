@@ -1,49 +1,49 @@
 [
   {
     "guide": "docs/agents/source-reference.md",
-    "path": "ui-common/src/main/kotlin/com/apexfission/android/ui/common/ActionCard.kt",
-    "sha256": "b2036581279298124ab10e50d6b2df1d5bb61777b00dc896bc2c0db1a5ba571f",
-    "visibility": "public"
-  },
-  {
-    "guide": "docs/agents/source-reference.md",
-    "path": "ui-common/src/main/kotlin/com/apexfission/android/ui/common/CatalogScreen.kt",
-    "sha256": "7c66499516f8e0e2f820bc0a4994edee361d879a97046b127d381786878804f5",
-    "visibility": "public"
-  },
-  {
-    "guide": "docs/agents/source-reference.md",
-    "path": "ui-common/src/main/kotlin/com/apexfission/android/ui/common/CodeVerificationCard.kt",
-    "sha256": "8de92bd913168655232c4f42dddf571bb2542ba5a32776a1676e12da2cf3d73e",
-    "visibility": "public"
-  },
-  {
-    "guide": "docs/agents/source-reference.md",
-    "path": "ui-common/src/main/kotlin/com/apexfission/android/ui/common/ContentCard.kt",
-    "sha256": "1c404bb25e9fa9c4e0fb8f537b2f3f6c8c13d5c398faae80f23fe31be672735b",
-    "visibility": "public"
-  },
-  {
-    "guide": "docs/agents/source-reference.md",
-    "path": "ui-common/src/main/kotlin/com/apexfission/android/ui/common/EmptyStateCard.kt",
-    "sha256": "599a3e55c6ec2ca7c360c76a2679478eb86707a8f65464c1a27dda846ec2a534",
+    "path": "ui-code-verification/src/main/kotlin/com/apexfission/android/ui/common/CodeVerificationCard.kt",
+    "sha256": "0cac35ced6440163b194b69911925df1bd8d573b631facfc212c48f7b7f1781e",
     "visibility": "public"
   },
   {
     "guide": null,
-    "path": "ui-common/src/main/kotlin/com/apexfission/android/ui/common/OneTimeCode.kt",
+    "path": "ui-code-verification/src/main/kotlin/com/apexfission/android/ui/common/OneTimeCode.kt",
     "sha256": "db0600ca876f6b870b2852ca56935648570c23f303331bd2499934c5fedc17b8",
     "visibility": "nonpublic"
   },
   {
     "guide": "docs/agents/source-reference.md",
-    "path": "ui-common/src/main/kotlin/com/apexfission/android/ui/common/OneTimeCodeField.kt",
+    "path": "ui-code-verification/src/main/kotlin/com/apexfission/android/ui/common/OneTimeCodeField.kt",
     "sha256": "c978c905fa72a067875147681b4829c23a310477e7811079ebe102f0d4aa4a87",
     "visibility": "public"
   },
   {
     "guide": "docs/agents/source-reference.md",
-    "path": "ui-common/src/main/kotlin/com/apexfission/android/ui/common/SectionHeading.kt",
+    "path": "ui-demo-common/src/main/kotlin/com/apexfission/android/ui/common/ActionCard.kt",
+    "sha256": "b2036581279298124ab10e50d6b2df1d5bb61777b00dc896bc2c0db1a5ba571f",
+    "visibility": "public"
+  },
+  {
+    "guide": "docs/agents/source-reference.md",
+    "path": "ui-demo-common/src/main/kotlin/com/apexfission/android/ui/common/CatalogScreen.kt",
+    "sha256": "7c66499516f8e0e2f820bc0a4994edee361d879a97046b127d381786878804f5",
+    "visibility": "public"
+  },
+  {
+    "guide": "docs/agents/source-reference.md",
+    "path": "ui-demo-common/src/main/kotlin/com/apexfission/android/ui/common/ContentCard.kt",
+    "sha256": "1c404bb25e9fa9c4e0fb8f537b2f3f6c8c13d5c398faae80f23fe31be672735b",
+    "visibility": "public"
+  },
+  {
+    "guide": "docs/agents/source-reference.md",
+    "path": "ui-demo-common/src/main/kotlin/com/apexfission/android/ui/common/EmptyStateCard.kt",
+    "sha256": "599a3e55c6ec2ca7c360c76a2679478eb86707a8f65464c1a27dda846ec2a534",
+    "visibility": "public"
+  },
+  {
+    "guide": "docs/agents/source-reference.md",
+    "path": "ui-demo-common/src/main/kotlin/com/apexfission/android/ui/common/SectionHeading.kt",
     "sha256": "052b30b3df7e96377af5b65c18fb650043e39a26cf3f097e28943340289bd99f",
     "visibility": "public"
   }

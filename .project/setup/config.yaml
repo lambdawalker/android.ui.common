@@ -2,24 +2,33 @@ repository: lambdawalker/android.ui.common
 title: UI Common
 tooling_ref: v0.1.28
 modules:
-  ui-common: UI Common
+  ui-demo-common: UI Demo Common
+  ui-code-verification: UI Code Verification
 key_alias: ui-common
 android_modules:
-  ui-common:
-    path: ':ui-common'
-    directory: ui-common
-    kind: library
-    selected: true
-    screenshots: true
-    namespace: com.apexfission.android.ui.common
   app:
-    path: ':app'
+    path: :app
     directory: app
     kind: application
     selected: true
     screenshots: true
     namespace: com.apexfission.android.ui.common.sample
-    application_ids: [com.apexfission.android.ui.common.sample]
+    application_ids:
+    - com.apexfission.android.ui.common.sample
+  ui-demo-common:
+    path: :ui-demo-common
+    directory: ui-demo-common
+    kind: library
+    selected: true
+    screenshots: true
+    namespace: com.apexfission.android.ui.demo
+  ui-code-verification:
+    path: :ui-code-verification
+    directory: ui-code-verification
+    kind: library
+    selected: true
+    screenshots: true
+    namespace: com.apexfission.android.ui.codeverification
 workflows:
   title: UI Common
   java_version: '25'
@@ -27,9 +36,19 @@ workflows:
   screenshot_check_command: sh ./docs.sh check
   release_validation_command: sh ./docs.sh check
 module_verification:
-  ui-common:
+  ui-demo-common:
     class_prefix: com/apexfission/android/ui/common/
     bytecode_major: 61
-    required_api_artifacts: [foundation, ui, material3]
+    required_api_artifacts:
+    - foundation
+    - ui
+    - material3
+  ui-code-verification:
+    class_prefix: com/apexfission/android/ui/common/
+    bytecode_major: 61
+    required_api_artifacts:
+    - foundation
+    - ui
+    - material3
 bootstrap:
   jitpack: true

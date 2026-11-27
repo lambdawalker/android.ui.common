@@ -31,5 +31,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "android.ui.common"
-include(":ui-common")
+include(":ui-demo-common", ":ui-code-verification")
 include(":app")

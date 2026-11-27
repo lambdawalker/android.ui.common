@@ -1,14 +1,18 @@
 schema: 1
 repository: lambdawalker/android.ui.common
 title: UI Common
-tooling_ref: '1da53392b262c7c3129d2bd645dfd7b34ead81e1'
+tooling_ref: 1da53392b262c7c3129d2bd645dfd7b34ead81e1
 modules:
-  ui-common: UI Common
+  ui-demo-common: UI Demo Common
+  ui-code-verification: UI Code Verification
 sources:
-  roots: [ui-common/src/main/kotlin]
+  roots:
+  - ui-demo-common/src/main/kotlin
+  - ui-code-verification/src/main/kotlin
   manifest: docs/api-inputs.json
   groups:
-  - include: ['**/*.kt']
+  - include:
+    - '**/*.kt'
     intro: .project/docs/introductions/api.md
     output: docs/agents/source-reference.md
   examples:
