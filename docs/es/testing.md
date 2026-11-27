@@ -3,10 +3,10 @@
 Las vistas previas y los escenarios deterministas cubren tarjetas, encabezados, catálogos, estados del código, tema alternativo, pantallas estrechas y texto grande. La aplicación incluye inglés y español. Las muestras no acceden a servidores, Keystore, cámara ni credenciales reales.
 
 ```sh
-./gradlew :ui-common:testDebugUnitTest :ui-common:lintDebug :app:lintDebug :app:assembleDebug
-./gradlew :ui-common:assembleDebugAndroidTest :app:assembleDebugAndroidTest
-./gradlew :ui-common:connectedDebugAndroidTest :app:connectedDebugAndroidTest
-./gradlew :ui-common:validateDebugScreenshotTest :app:validateDebugScreenshotTest
+./gradlew :ui-demo-common:testDebugUnitTest :ui-code-verification:testDebugUnitTest :ui-demo-common:lintDebug :ui-code-verification:lintDebug :app:lintDebug :app:assembleDebug
+./gradlew :ui-demo-common:assembleDebugAndroidTest :ui-code-verification:assembleDebugAndroidTest :app:assembleDebugAndroidTest
+./gradlew :ui-demo-common:connectedDebugAndroidTest :ui-code-verification:connectedDebugAndroidTest :app:connectedDebugAndroidTest
+./gradlew :ui-demo-common:validateDebugScreenshotTest :ui-code-verification:validateDebugScreenshotTest :app:validateDebugScreenshotTest
 sh ./docs.sh check
 sh ./docs.sh build --check --base /
 sh ./docs.sh build --check --base /android.ui.common/

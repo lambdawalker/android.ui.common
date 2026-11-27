@@ -23,7 +23,8 @@ android {
 kotlin { jvmToolchain(17) }
 
 dependencies {
-    implementation(project(":ui-common"))
+    implementation(project(":ui-demo-common"))
+    implementation(project(":ui-code-verification"))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui.tooling.preview)

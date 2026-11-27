@@ -2,7 +2,7 @@
 
 Reusable Material 3 Compose cards, catalogs and verification-code entry that inherit your app's theme.
 
-**JitPack release 0.1.0 is confirmed.** Read [installation](IMPORT.md) and the
+**The split libraries are Development/source integration.** Historical monolithic releases remain available. Read [installation](IMPORT.md) and the
 [consumer guide](docs/agents/index.md). The sample app demonstrates state, callbacks and localization.
 
 | Component | Use |
@@ -32,13 +32,35 @@ Start with [quickstart](docs/agents/quickstart.md), [API contracts](docs/agents/
 
 ```sh
 sh ./setup.sh --help
-./gradlew :ui-common:testDebugUnitTest :ui-common:lintDebug :app:assembleDebug
+./gradlew :ui-demo-common:testDebugUnitTest :ui-code-verification:testDebugUnitTest :ui-demo-common:lintDebug :ui-code-verification:lintDebug :app:assembleDebug
 sh ./docs.sh check
 sh ./docs.sh build --check
 ```
 
 Setup/publishing and documentation use separately pinned shared CLIs. The website uses bundled Astro;
 this repository owns its content and component evidence. Screenshot candidates require deliberate review.
+
+## Development module split
+
+Current source contains two independent libraries and one unpublished catalog app:
+
+| Module | Components |
+| --- | --- |
+| `:ui-demo-common` | ContentCard, ActionCard, SectionHeading, EmptyStateCard, CatalogScreen |
+| `:ui-code-verification` | OneTimeCodeField, CodeVerificationCard (both overloads), VerificationCardDetails, VerificationRecipientRow |
+| `:app` | Unified catalog, navigation, examples and preview controls; depends on both libraries |
+
+Neither library depends on the other. Kotlin packages remain `com.apexfission.android.ui.common`;
+Android resource namespaces are `com.apexfission.android.ui.demo` and
+`com.apexfission.android.ui.codeverification`. API 28, Java 17, host theming and caller-owned state remain unchanged.
+
+The new modules are **Development/source integration**, with no confirmed published versions.
+For a local multi-project build, depend on `project(":ui-demo-common")` and/or
+`project(":ui-code-verification")`. Consumers should replace the monolithic dependency across
+their complete dependency graph: never combine the old AAR with either extracted library,
+because their Kotlin classes overlap. External consumer migrations and publishing automation
+are deferred until the release follow-up. Historical release receipts remain unchanged;
+release information below concerns the old monolithic artifact, not the split libraries.
 
 ## License
 

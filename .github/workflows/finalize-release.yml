@@ -15,7 +15,7 @@ on:
         description: 'Module whose existing publication should be finalized'
         type: choice
         required: true
-        options: ["ui-common"]
+        options: ["ui-code-verification", "ui-demo-common"]
       version:
         description: 'Existing release X.Y.Z to verify and finalize. Never uploads artifacts.'
         required: true

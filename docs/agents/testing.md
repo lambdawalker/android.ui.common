@@ -5,10 +5,10 @@ catalogs, field states, host theme and narrow/large text. The sample has English
 Fixtures never access a server, Keystore, camera or real credentials.
 
 ```sh
-./gradlew :ui-common:testDebugUnitTest :ui-common:lintDebug :app:lintDebug :app:assembleDebug
-./gradlew :ui-common:assembleDebugAndroidTest :app:assembleDebugAndroidTest
-./gradlew :ui-common:connectedDebugAndroidTest :app:connectedDebugAndroidTest
-./gradlew :ui-common:validateDebugScreenshotTest :app:validateDebugScreenshotTest
+./gradlew :ui-demo-common:testDebugUnitTest :ui-code-verification:testDebugUnitTest :ui-demo-common:lintDebug :ui-code-verification:lintDebug :app:lintDebug :app:assembleDebug
+./gradlew :ui-demo-common:assembleDebugAndroidTest :ui-code-verification:assembleDebugAndroidTest :app:assembleDebugAndroidTest
+./gradlew :ui-demo-common:connectedDebugAndroidTest :ui-code-verification:connectedDebugAndroidTest :app:connectedDebugAndroidTest
+./gradlew :ui-demo-common:validateDebugScreenshotTest :ui-code-verification:validateDebugScreenshotTest :app:validateDebugScreenshotTest
 sh ./docs.sh check
 sh ./docs.sh build --check --base /
 sh ./docs.sh build --check --base /android.ui.common/

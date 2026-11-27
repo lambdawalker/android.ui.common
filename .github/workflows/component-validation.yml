@@ -21,15 +21,16 @@ jobs:
           log-accepted-android-sdk-licenses: false
       - uses: gradle/actions/setup-gradle@v5
       - name: Compile, unit test and lint
-        run: ./gradlew :ui-common:testDebugUnitTest :ui-common:lintDebug :app:lintDebug :app:assembleDebug :ui-common:assembleDebugAndroidTest :app:assembleDebugAndroidTest --no-daemon
+        run: ./gradlew :ui-demo-common:testDebugUnitTest :ui-code-verification:testDebugUnitTest :ui-demo-common:lintDebug :ui-code-verification:lintDebug :app:lintDebug :app:assembleDebug :ui-demo-common:assembleDebugAndroidTest :ui-code-verification:assembleDebugAndroidTest :app:assembleDebugAndroidTest --no-daemon
       - name: Render candidates (not accepted regression baselines)
-        run: ./gradlew :ui-common:updateDebugScreenshotTest :app:updateDebugScreenshotTest --no-daemon
+        run: ./gradlew :ui-demo-common:updateDebugScreenshotTest :ui-code-verification:updateDebugScreenshotTest :app:updateDebugScreenshotTest --no-daemon
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: component-candidates-and-reports
           path: |
-            ui-common/src/screenshotTestDebug/reference
+            ui-demo-common/src/screenshotTestDebug/reference
+            ui-code-verification/src/screenshotTestDebug/reference
             app/src/screenshotTestDebug/reference
             **/build/reports
           if-no-files-found: error
@@ -59,13 +60,15 @@ jobs:
           target: google_apis
           arch: x86_64
           disable-animations: true
-          script: ./gradlew :ui-common:connectedDebugAndroidTest :app:connectedDebugAndroidTest --no-daemon
+          script: ./gradlew :ui-demo-common:connectedDebugAndroidTest :ui-code-verification:connectedDebugAndroidTest :app:connectedDebugAndroidTest --no-daemon
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: component-interaction-reports
           path: |
-            ui-common/build/reports/androidTests
-            ui-common/build/outputs/androidTest-results
+            ui-demo-common/build/reports/androidTests
+            ui-code-verification/build/reports/androidTests
+            ui-demo-common/build/outputs/androidTest-results
+            ui-code-verification/build/outputs/androidTest-results
             app/build/reports/androidTests
             app/build/outputs/androidTest-results
