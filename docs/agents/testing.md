@@ -18,7 +18,10 @@ Connected tests require an emulator/device. Screenshot validation compares revie
 initial rendered output is a candidate, not an accepted baseline. See [screenshot policy](../screenshots/README.md)
 for rendering and intentional acceptance. Do not refresh baselines merely to silence a difference.
 Unit tests cover normalization; Compose tests cover callbacks, semantics, input and explicit paste.
-The sample device tests check the top App settings intent, return and recreation. The detailed card
+The sample device tests check the top App settings intent and actual Settings round trip, every
+demo-list destination, header/system Back, list-position restoration, rotation with code/error state,
+and a fresh state when reopening an example. Sample screenshots cover the list and all six examples
+in light/dark themes and Spanish at 320dp with large text. The detailed card
 tests check one logical input, host-owned recipient status and a shared action row below the recipient.
 They also check narrow/large-text actions, error semantics and notice order, and focus during error recovery. Input
 tests tap individual cells, replace digits, delete and paste. They inspect selection semantics and

@@ -23,7 +23,9 @@ it is not available in the confirmed 0.1.0 artifact. The original card signature
 
 These are synthetic rendered documentation illustrations, not accepted regression baselines.
 See [capture provenance](docs/screenshots/documentation.json). The sample also exposes **App settings**
-above the catalog to open Android application details for its installed package.
+above the demo list to open Android application details for its installed package. Choose a list
+item to open its own offline example, then use **Back to demos** or system Back to return.
+See [the demo guide](docs/agents/recipes.md#sample-demo-list) for the available examples.
 
 Start with [quickstart](docs/agents/quickstart.md), [API contracts](docs/agents/api.md),
 [migration](docs/agents/migration.md), [testing](docs/agents/testing.md) and [release maintenance](docs/releases.md).
