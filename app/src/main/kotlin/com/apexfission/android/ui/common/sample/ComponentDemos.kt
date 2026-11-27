@@ -29,13 +29,19 @@ internal enum class ComponentDemo(@param:StringRes val title: Int, @param:String
 /** Navigation and example state belong to the unpublished sample, never the library. */
 @Composable
 internal fun ComponentDemoApp(onOpenSettings: () -> Unit) {
+    var component by rememberSaveable { mutableStateOf<ComponentDemo?>(null) }
     var selected by rememberSaveable { mutableStateOf<ComponentDemo?>(null) }
     val catalogState = rememberSaveableStateHolder()
-    BackHandler(enabled = selected != null) { selected = null }
+    BackHandler(enabled = component != null) { if (selected != null) selected = null else component = null }
     val demo = selected
-    if (demo == null) {
+    if (component == null) {
         catalogState.SaveableStateProvider("catalog") {
-            ComponentCatalog(onOpenDemo = { selected = it }, onOpenSettings = onOpenSettings)
+            ComponentCatalog(onOpenDemo = { component = it }, onOpenSettings = onOpenSettings)
+        }
+    } else if (demo == null) {
+        catalogState.SaveableStateProvider("demos-${component!!.name}") {
+            ComponentDemoList(component!!, onOpenDemo = { selected = component },
+                onBack = { component = null }, onOpenSettings = onOpenSettings)
         }
     } else key(demo) {
         ComponentDemoScreen(demo, onBack = { selected = null }, onOpenSettings = onOpenSettings)
@@ -65,13 +71,27 @@ internal fun ComponentCatalog(onOpenDemo: (ComponentDemo) -> Unit = {}, onOpenSe
     }
 }
 
+/** Every component owns its demo catalog; add scenarios here as components grow. */
 @Composable
-private fun DemoHeaderActions(onOpenSettings: () -> Unit, onBack: (() -> Unit)? = null) {
+internal fun ComponentDemoList(component: ComponentDemo, onOpenDemo: () -> Unit = {},
+    onBack: () -> Unit = {}, onOpenSettings: () -> Unit = {}) {
+    CatalogScreen(title = stringResource(component.title),
+        description = stringResource(R.string.component_demos),
+        headerActions = { DemoHeaderActions(onOpenSettings, onBack, R.string.back_to_components) }) {
+        item {
+            ActionCard(stringResource(R.string.interactive_demo), stringResource(component.description),
+                stringResource(R.string.open), onOpenDemo)
+        }
+    }
+}
+
+@Composable
+private fun DemoHeaderActions(onOpenSettings: () -> Unit, onBack: (() -> Unit)? = null, @StringRes backLabel: Int = R.string.back_to_demos) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         if (onBack != null) TextButton(onClick = onBack, shape = MaterialTheme.shapes.small) {
             Icon(painterResource(R.drawable.demo_back), contentDescription = null)
             Spacer(Modifier.width(8.dp))
-            Text(stringResource(R.string.back_to_demos))
+            Text(stringResource(backLabel))
         }
         OutlinedButton(onClick = onOpenSettings, modifier = Modifier.fillMaxWidth(), shape = MaterialTheme.shapes.small) {
             Text(stringResource(R.string.app_settings))

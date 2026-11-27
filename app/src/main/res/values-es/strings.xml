@@ -37,4 +37,7 @@
     <string name="recipient_demo_description">Destino y estado proporcionados por la aplicación, con ajuste de línea.</string>
     <string name="empty_demo">Estado vacío</string>
     <string name="incorrect_code">Código incorrecto</string>
+    <string name="component_demos">Demostraciones del componente</string>
+    <string name="back_to_components">Volver a componentes</string>
+    <string name="interactive_demo">Ejemplo interactivo</string>
 </resources>

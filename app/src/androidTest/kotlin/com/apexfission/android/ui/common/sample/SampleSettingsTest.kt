@@ -66,6 +66,7 @@ class SampleSettingsTest {
             scrollTo(hasText(compose.activity.getString(R.string.back_to_demos)))
             compose.onNodeWithText(compose.activity.getString(R.string.back_to_demos)).performClick()
             compose.onNodeWithText(compose.activity.getString(R.string.back_to_demos)).assertDoesNotExist()
+            compose.onNodeWithText(compose.activity.getString(R.string.back_to_components)).performClick()
             // The list retains its position, including the final item below the initial viewport.
             compose.onNodeWithText(compose.activity.getString(demo.title)).assertIsDisplayed()
         }
@@ -87,7 +88,7 @@ class SampleSettingsTest {
         closeSoftKeyboard()
         pressBack()
         compose.onNodeWithText(compose.activity.getString(R.string.back_to_demos)).assertDoesNotExist()
-        openDemo(ComponentDemo.Verification)
+        compose.onNodeWithText(compose.activity.getString(R.string.open)).performClick()
         field.performScrollTo().assertTextEquals("")
     }
 
@@ -95,6 +96,9 @@ class SampleSettingsTest {
         val title = compose.activity.getString(demo.title)
         scrollTo(hasText(title))
         compose.onNodeWithText(title).performClick()
+        compose.activityRule.scenario.recreate()
+        compose.onNodeWithText(compose.activity.getString(R.string.back_to_components)).assertIsDisplayed()
+        compose.onNodeWithText(compose.activity.getString(R.string.open)).performClick()
     }
 
     private fun scrollTo(matcher: SemanticsMatcher) {
