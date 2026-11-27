@@ -37,4 +37,7 @@
     <string name="recipient_demo_description">A wrapping destination and status supplied by the host.</string>
     <string name="empty_demo">Empty state</string>
     <string name="incorrect_code">Incorrect code</string>
+    <string name="component_demos">Component demos</string>
+    <string name="back_to_components">Back to components</string>
+    <string name="interactive_demo">Interactive example</string>
 </resources>
